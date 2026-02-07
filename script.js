@@ -568,6 +568,7 @@ function initJoinModal() {
         const whatsappUrl = `https://wa.me/966566620279?text=${encodeURIComponent(message)}`;
 
         // فتح الواتساب
+        alert('سيتم تحويلك للواتساب الآن لإرسال طلب الانضمام...\n' + message);
         window.open(whatsappUrl, '_blank');
 
         // إغلاق وتصفير

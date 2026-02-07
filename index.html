@@ -548,6 +548,54 @@
         </div>
     </section>
 
+    <!-- دليل المقاولين -->
+    <section class="section contractors-section" id="contractors">
+        <div class="section-header">
+            <span class="section-tag"><i class="fa-solid fa-helmet-safety"></i> شركاء النجاح</span>
+            <h2>دليل المقاولين المعتمدين</h2>
+            <p>نخبة من أفضل المقاولين المستعدين لتنفيذ مشروعك</p>
+            <button class="btn-primary" id="joinContractorBtn">
+                <i class="fa-solid fa-plus"></i> انضم كمقاول
+            </button>
+        </div>
+
+        <div class="contractors-grid" id="contractorsGrid">
+            <!-- سيتم ملؤها بـ JavaScript -->
+        </div>
+    </section>
+
+    <!-- نافذة انضمام مقاول -->
+    <div class="modal hidden" id="contractorModal">
+        <div class="modal-overlay"></div>
+        <div class="modal-content glass-card">
+            <button class="close-modal-btn"><i class="fa-solid fa-times"></i></button>
+            <h3><i class="fa-solid fa-handshake"></i> انضم لشركاء المعمار الذكي</h3>
+            <form id="contractorForm">
+                <div class="form-group">
+                    <label>الاسم الكامل</label>
+                    <input type="text" id="contName" required placeholder="اسمك أو اسم المؤسسة">
+                </div>
+                <div class="form-group">
+                    <label>التخصص</label>
+                    <select id="contSpecialty">
+                        <option value="مقاول عام">مقاول عام</option>
+                        <option value="كهربائي">كهربائي</option>
+                        <option value="سباك">سباك</option>
+                        <option value="دهان">دهان</option>
+                        <option value="تكييف">تكييف</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>رقم الهاتف</label>
+                    <input type="tel" id="contPhone" required placeholder="05xxxxxxxx">
+                </div>
+                <button type="submit" class="btn-primary" style="width: 100%; margin-top: 1rem;">
+                    تسجيل الانضمام
+                </button>
+            </form>
+        </div>
+    </div>
+
     <!-- Footer -->
     <footer class="main-footer">
         <div class="footer-content">

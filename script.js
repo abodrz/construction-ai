@@ -26,6 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initVideoModal();
     initCalendarButtons();
     initReportButton();
+    initContractors();
 });
 
 // ============ نافذة الترحيب ============
@@ -469,4 +470,92 @@ function initReportButton() {
             window.print();
         });
     }
+}
+
+// ============ دليل المقاولين ============
+const contractorsData = [
+    { name: 'مؤسسة العمران الحديث', specialty: 'مقاول عام', rating: 4.8, reviews: 120, initial: 'ع' },
+    { name: 'فني كهرباء المحترفين', specialty: 'كهربائي', rating: 4.9, reviews: 85, initial: 'ك' },
+    { name: 'السباكة الذهبية', specialty: 'سباك', rating: 4.7, reviews: 92, initial: 'س' },
+    { name: 'دهانات الألوان', specialty: 'دهان', rating: 4.6, reviews: 64, initial: 'د' }
+];
+
+function initContractors() {
+    renderContractors();
+    initJoinModal();
+}
+
+function renderContractors() {
+    const grid = document.getElementById('contractorsGrid');
+    if (!grid) return;
+
+    grid.innerHTML = '';
+    contractorsData.forEach(cont => {
+        const card = document.createElement('div');
+        card.className = 'contractor-card glass-card';
+        card.innerHTML = `
+            <div class="contractor-header">
+                <div class="contractor-avatar">${cont.initial}</div>
+                <div class="contractor-info">
+                    <h4>${cont.name}</h4>
+                    <span class="specialty"><i class="fa-solid fa-briefcase"></i> ${cont.specialty}</span>
+                </div>
+            </div>
+            <div class="contractor-body">
+                <div class="rating">
+                    <i class="fa-solid fa-star"></i>
+                    <strong>${cont.rating}</strong>
+                    <span>(${cont.reviews} تقييم)</span>
+                </div>
+                <button class="btn-hire" onclick="window.open('https://wa.me/966566620279?text=مرحباً، أرغب بالاستفسار عن خدماتك في منصة المعمار الذكي', '_blank')">
+                    <i class="fa-brands fa-whatsapp"></i> تواصل معي
+                </button>
+            </div>
+        `;
+        grid.appendChild(card);
+    });
+}
+
+function initJoinModal() {
+    const modal = document.getElementById('contractorModal');
+    const btn = document.getElementById('joinContractorBtn');
+    const closeBtn = modal.querySelector('.close-modal-btn');
+    const overlay = modal.querySelector('.modal-overlay');
+    const form = document.getElementById('contractorForm');
+
+    if (!btn || !modal) return;
+
+    btn.addEventListener('click', () => modal.classList.remove('hidden'));
+
+    const closeModal = () => modal.classList.add('hidden');
+    closeBtn.addEventListener('click', closeModal);
+    overlay.addEventListener('click', closeModal);
+
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        // محاكاة الإضافة
+        const name = document.getElementById('contName').value;
+        const specialty = document.getElementById('contSpecialty').value;
+
+        const newContractor = {
+            name: name,
+            specialty: specialty,
+            rating: 5.0, // تقييم مبدئي
+            reviews: 0,
+            initial: name.charAt(0)
+        };
+
+        contractorsData.unshift(newContractor); // إضافة في البداية
+        renderContractors();
+
+        // إغلاق وتصفير
+        closeModal();
+        form.reset();
+
+        alert('تم تسجيلك بنجاح! ظهرت بطاقتك في القائمة فوراً 🚀');
+
+        // الذهاب للقسم
+        document.getElementById('contractors').scrollIntoView({ behavior: 'smooth' });
+    });
 }

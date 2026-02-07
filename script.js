@@ -25,6 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initFormHandler();
     initVideoModal();
     initCalendarButtons();
+    initReportButton();
 });
 
 // ============ نافذة الترحيب ============
@@ -458,4 +459,14 @@ function initCalendarButtons() {
             window.open(url, '_blank');
         });
     });
+}
+
+// ============ زر التقرير ============
+function initReportButton() {
+    const btn = document.getElementById('downloadReportBtn');
+    if (btn) {
+        btn.addEventListener('click', () => {
+            window.print();
+        });
+    }
 }

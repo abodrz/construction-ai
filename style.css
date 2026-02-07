@@ -1403,14 +1403,22 @@ option {
 }
 
 @keyframes zoomIn {
-    from { transform: scale(0.9); opacity: 0; }
-    to { transform: scale(1); opacity: 1; }
+    from {
+        transform: scale(0.9);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
 }
 
 .close-video-btn {
     position: absolute;
     top: 1rem;
-    left: 1rem; /* RTL */
+    left: 1rem;
+    /* RTL */
     background: rgba(255, 255, 255, 0.1);
     border: none;
     color: white;
@@ -1448,7 +1456,8 @@ option {
 .video-wrapper {
     position: relative;
     width: 100%;
-    padding-top: 56.25%; /* 16:9 Aspect Ratio */
+    padding-top: 56.25%;
+    /* 16:9 Aspect Ratio */
     background: black;
 }
 
@@ -1510,4 +1519,163 @@ option {
     color: white;
     box-shadow: 0 5px 15px rgba(124, 58, 237, 0.3);
     transform: translateY(-2px);
+}
+
+/* ============ تنسيق تقرير الطباعة (PDF) ============ */
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.btn-sm {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.8rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: inherit;
+    transition: var(--transition-fast);
+}
+
+.btn-outline {
+    background: transparent;
+    border: 1px solid var(--primary);
+    color: var(--primary);
+}
+
+.btn-outline:hover {
+    background: rgba(0, 212, 255, 0.1);
+}
+
+@media print {
+    /* إخفاء العناصر غير الضرورية */
+    .navbar,
+    .hero,
+    .animated-bg,
+    .materials-section,
+    .gallery-section,
+    .stages-section,
+    .tips-section,
+    .main-footer,
+    .welcome-modal,
+    .video-modal,
+    .calc-form,
+    .results-placeholder,
+    .extra-options,
+    .btn-calculate,
+    #downloadReportBtn,
+    /* إخفاء زر الطباعة نفسه */
+    .btn-calendar
+
+    /* إخفاء أزرار التقويم */
+        {
+        display: none !important;
+    }
+
+    /* تنسيق الحاوية الرئيسية */
+    body {
+        background: white !important;
+        color: black !important;
+        overflow: visible !important;
+    }
+
+    .section {
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+
+    .calculator-section {
+        padding: 2cm !important;
+    }
+
+    .calculator-grid {
+        display: block !important;
+    }
+
+    /* تنسيق النتائج */
+    .calc-results {
+        display: block !important;
+        opacity: 1 !important;
+        transform: none !important;
+        background: white !important;
+        border: 2px solid #333 !important;
+        box-shadow: none !important;
+        color: black !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+
+    .results-content {
+        display: block !important;
+    }
+
+    /* إضافة ترويسة للتقرير */
+    .result-header::before {
+        content: "المعمار الذكي - تقرير تقديري";
+        display: block;
+        font-size: 24pt;
+        font-weight: bold;
+        text-align: center;
+        margin-bottom: 20px;
+        color: black;
+        border-bottom: 2px solid #000;
+        padding-bottom: 10px;
+    }
+
+    .result-header h3 {
+        display: none !important;
+        /* إخفاء العنوان الأصلي */
+    }
+
+    .result-header {
+        border-bottom: none !important;
+    }
+
+    /* تنسيق الأرقام */
+    .total-cost {
+        background: #f0f0f0 !important;
+        border: 1px solid #ccc !important;
+        color: black !important;
+        page-break-inside: avoid;
+    }
+
+    .total-cost h2 {
+        color: black !important;
+    }
+
+    .cost-item {
+        background: white !important;
+        border-bottom: 1px solid #ddd !important;
+        color: black !important;
+        padding: 10px 0 !important;
+    }
+
+    .info-cards {
+        margin-top: 20px;
+        border-top: 2px solid #000;
+        padding-top: 20px;
+    }
+
+    .info-card {
+        background: white !important;
+        border: 1px solid #ddd !important;
+        color: black !important;
+    }
+
+    .info-value,
+    .info-label {
+        color: black !important;
+    }
+
+    /* إضافة تذييل */
+    .results-content::after {
+        content: "تم التوليد بواسطة منصة المعمار الذكي | حقوق النشر محفوظة © 2026";
+        display: block;
+        text-align: center;
+        margin-top: 50px;
+        font-size: 10pt;
+        color: #666;
+        border-top: 1px solid #ccc;
+        padding-top: 10px;
+    }
 }

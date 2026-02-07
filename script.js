@@ -362,11 +362,18 @@ function calculateCost() {
 }
 
 function calculateQuantities(area) {
-    // معادلات تقريبية (Rules of Thumb)
-    const iron = (area * 50) / 1000; // 50 كجم للمتر (للأطنان)
-    const blocks = Math.ceil(area * 12); // 12 بلوكة للمتر
-    const cement = Math.ceil(area * 3.5); // 3.5 كيس للمتر (شامل الخرسانة والمباني)
-    const sand = Math.ceil(area * 0.15); // 0.15 متر مكعب للمتر
+    // معادلات محدثة (أكثر واقعية للسوق السعودي)
+    // الحديد: متوسط 60-70 كجم للمتر المسطح (شامل القواعد والأعمدة والأسقف)
+    const iron = (area * 65) / 1000;
+
+    // البلوك: متوسط 40-50 بلوكة للمتر (شامل الجدران والهوردي والسور)
+    const blocks = Math.ceil(area * 45);
+
+    // الأسمنت: خرسانة + مباني + لياسة (حوالي 5-6 أكياس للمتر)
+    const cement = Math.ceil(area * 5.5);
+
+    // الرمل: للخرسانة واللياسة (0.25 متر مكعب تقريباً)
+    const sand = Math.ceil(area * 0.25);
 
     // تحديث الواجهة
     animateValue('qtyIron', 0, iron, 1000);

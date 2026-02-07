@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>المعمار الذكي | منصة البناء المتكاملة - عامر درزي العنزي</title>
+    <meta name="description" content="منصة ذكاء اصطناعي متكاملة لحساب تكاليف البناء واختيار المواد والتصميم الداخلي">
+    <link rel="stylesheet" href="style.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700;900&family=Tajawal:wght@400;500;700;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+    <!-- نافذة الترحيب -->
+    <div class="welcome-modal" id="welcomeModal">
+        <div class="welcome-overlay"></div>
+        <div class="welcome-content">
+            <div class="welcome-icon">
+                <i class="fa-solid fa-building"></i>
+            </div>
+            <h2>أهلاً وسهلاً بكم</h2>
+            <p class="welcome-tagline">للاختيار الأفضل</p>
+            <div class="welcome-divider"></div>
+            <p class="welcome-desc">منصة المعمار الذكي - شريكك في بناء منزل أحلامك</p>
+            <button class="welcome-btn" id="welcomeBtn">
+                <span>ابدأ الآن</span>
+                <i class="fa-solid fa-arrow-left"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- الخلفية المتحركة -->
+    <div class="animated-bg">
+        <div class="gradient-orb orb-1"></div>
+        <div class="gradient-orb orb-2"></div>
+        <div class="gradient-orb orb-3"></div>
+        <div class="grid-overlay"></div>
+    </div>
+
+    <!-- شريط التنقل -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <div class="logo-icon">
+                    <i class="fa-solid fa-building"></i>
+                </div>
+                <div class="logo-text">
+                    <span class="brand">المعمار الذكي</span>
+                    <span class="tagline">AI Construction Platform</span>
+                </div>
+            </div>
+            <div class="nav-links">
+                <a href="#calculator" class="nav-link"><i class="fa-solid fa-calculator"></i> حاسبة التكلفة</a>
+                <a href="#materials" class="nav-link"><i class="fa-solid fa-cubes"></i> المواد</a>
+                <a href="#gallery" class="nav-link"><i class="fa-solid fa-images"></i> المعرض</a>
+                <a href="#stages" class="nav-link"><i class="fa-solid fa-list-check"></i> المراحل</a>
+                <a href="#tips" class="nav-link"><i class="fa-solid fa-lightbulb"></i> نصائح</a>
+            </div>
+            <div class="developer-tag">
+                <i class="fa-solid fa-code"></i>
+                عامر درزي العنزي
+            </div>
+        </div>
+    </nav>
+
+    <!-- القسم الرئيسي Hero -->
+    <header class="hero" id="home">
+        <div class="hero-content">
+            <div class="hero-badge">
+                <i class="fa-solid fa-microchip"></i>
+                مدعوم بالذكاء الاصطناعي
+            </div>
+            <h1 class="hero-title">
+                <span class="gradient-text">ابنِ منزل أحلامك</span>
+                <br>بذكاء وتخطيط مثالي
+            </h1>
+            <p class="hero-subtitle">
+                المنصة الأولى في المملكة العربية السعودية لتخطيط مشاريع البناء بالذكاء الاصطناعي
+                <br>احسب التكلفة • اختر المواد • شاهد التصميم • تابع المراحل
+            </p>
+            <div class="hero-stats">
+                <div class="stat">
+                    <span class="stat-number" data-count="5000">0</span>+
+                    <span class="stat-label">مشروع محسوب</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number" data-count="98">0</span>%
+                    <span class="stat-label">دقة التقدير</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number" data-count="150">0</span>+
+                    <span class="stat-label">نوع مادة</span>
+                </div>
+            </div>
+            <div class="hero-cta">
+                <a href="#calculator" class="btn-primary pulse-glow">
+                    <i class="fa-solid fa-rocket"></i>
+                    ابدأ مشروعك الآن
+                </a>
+                <a href="#gallery" class="btn-secondary">
+                    <i class="fa-solid fa-play"></i>
+                    شاهد المعرض
+                </a>
+            </div>
+        </div>
+        <div class="hero-visual">
+            <div class="floating-card card-1">
+                <i class="fa-solid fa-home"></i>
+                <span>فيلا سكنية</span>
+            </div>
+            <div class="floating-card card-2">
+                <i class="fa-solid fa-building"></i>
+                <span>عمارة</span>
+            </div>
+            <div class="floating-card card-3">
+                <i class="fa-solid fa-store"></i>
+                <span>تجاري</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- حاسبة التكلفة الذكية -->
+    <section class="section calculator-section" id="calculator">
+        <div class="section-header">
+            <span class="section-tag"><i class="fa-solid fa-brain"></i> ذكاء اصطناعي</span>
+            <h2>حاسبة تكلفة البناء الذكية</h2>
+            <p>أدخل بيانات مشروعك واحصل على تقرير شامل فوراً</p>
+        </div>
+
+        <div class="calculator-grid">
+            <!-- نموذج الإدخال -->
+            <div class="calc-form glass-card">
+                <form id="constructionForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label><i class="fa-solid fa-building-columns"></i> نوع المبنى</label>
+                            <select id="buildingType" required>
+                                <option value="villa">فيلا سكنية</option>
+                                <option value="duplex">دوبلكس</option>
+                                <option value="apartment">شقة / دور واحد</option>
+                                <option value="building">عمارة سكنية</option>
+                                <option value="commercial">مبنى تجاري</option>
+                                <option value="warehouse">مستودع</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label><i class="fa-solid fa-ruler-combined"></i> المساحة (م²)</label>
+                            <input type="number" id="area" placeholder="مثال: 400" required min="50" max="10000">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label><i class="fa-solid fa-layer-group"></i> عدد الأدوار</label>
+                            <select id="floors">
+                                <option value="1">دور واحد</option>
+                                <option value="2" selected>دورين</option>
+                                <option value="3">3 أدوار</option>
+                                <option value="4">4 أدوار</option>
+                                <option value="5">5 أدوار أو أكثر</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label><i class="fa-solid fa-star"></i> مستوى التشطيب</label>
+                            <select id="finishLevel">
+                                <option value="economy">اقتصادي</option>
+                                <option value="standard" selected>ديلوكس (قياسي)</option>
+                                <option value="luxury">سوبر ديلوكس</option>
+                                <option value="ultra">ألترا لوكس (VIP)</option>
+                                <option value="smart">منزل ذكي</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label><i class="fa-solid fa-map-marker-alt"></i> المنطقة</label>
+                            <select id="region">
+                                <option value="riyadh">الرياض</option>
+                                <option value="jeddah">جدة</option>
+                                <option value="eastern">المنطقة الشرقية</option>
+                                <option value="makkah">مكة المكرمة</option>
+                                <option value="madinah">المدينة المنورة</option>
+                                <option value="other">مناطق أخرى</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label><i class="fa-solid fa-calendar"></i> سنة البناء المتوقعة</label>
+                            <select id="year">
+                                <option value="2026" selected>2026</option>
+                                <option value="2027">2027</option>
+                                <option value="2028">2028</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- خيارات إضافية -->
+                    <div class="extra-options">
+                        <h4><i class="fa-solid fa-plus-circle"></i> إضافات اختيارية</h4>
+                        <div class="checkbox-grid">
+                            <label class="checkbox-item">
+                                <input type="checkbox" id="basement"> قبو (سرداب)
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" id="pool"> مسبح
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" id="elevator"> مصعد
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" id="solar"> طاقة شمسية
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" id="smartHome"> نظام ذكي
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" id="garden"> تنسيق حدائق
+                            </label>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn-calculate">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i>
+                        <span>حلل وأنشئ التقرير</span>
+                        <div class="btn-shine"></div>
+                    </button>
+                </form>
+            </div>
+
+            <!-- النتائج -->
+            <div class="calc-results glass-card" id="resultsPanel">
+                <div class="results-placeholder">
+                    <div class="placeholder-icon">
+                        <i class="fa-solid fa-chart-line"></i>
+                    </div>
+                    <h3>أدخل البيانات لرؤية النتائج</h3>
+                    <p>سيظهر هنا تقرير شامل بالتكلفة والمواد والمدة</p>
+                </div>
+
+                <div class="results-content hidden" id="resultsContent">
+                    <div class="result-header">
+                        <h3><i class="fa-solid fa-file-invoice-dollar"></i> تقرير التحليل الذكي</h3>
+                        <span class="ai-badge"><i class="fa-solid fa-robot"></i> AI Generated</span>
+                    </div>
+
+                    <div class="cost-breakdown">
+                        <div class="total-cost">
+                            <span class="label">إجمالي التكلفة التقديرية</span>
+                            <h2 id="totalCost">0</h2>
+                            <span class="currency">ريال سعودي</span>
+                        </div>
+                        <div class="cost-details">
+                            <div class="cost-item">
+                                <span>العظم</span>
+                                <span id="structureCost">0 ر.س</span>
+                            </div>
+                            <div class="cost-item">
+                                <span>التشطيب</span>
+                                <span id="finishCost">0 ر.س</span>
+                            </div>
+                            <div class="cost-item">
+                                <span>الكهرباء والسباكة</span>
+                                <span id="mecCost">0 ر.س</span>
+                            </div>
+                            <div class="cost-item">
+                                <span>الإضافات</span>
+                                <span id="extrasCost">0 ر.س</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="info-cards">
+                        <div class="info-card">
+                            <i class="fa-solid fa-clock"></i>
+                            <div>
+                                <span class="info-label">المدة التقديرية</span>
+                                <span class="info-value" id="duration">0 شهر</span>
+                            </div>
+                        </div>
+                        <div class="info-card">
+                            <i class="fa-solid fa-users"></i>
+                            <div>
+                                <span class="info-label">عدد العمال</span>
+                                <span class="info-value" id="workers">0 عامل</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم المواد -->
+    <section class="section materials-section" id="materials">
+        <div class="section-header">
+            <span class="section-tag"><i class="fa-solid fa-cubes"></i> قاعدة بيانات</span>
+            <h2>دليل مواد البناء الشامل</h2>
+            <p>تصفح أنواع المواد مع الأسعار التقريبية والمواصفات</p>
+        </div>
+
+        <div class="materials-tabs">
+            <button class="mat-tab active" data-category="structure">
+                <i class="fa-solid fa-building"></i> الهيكل الإنشائي
+            </button>
+            <button class="mat-tab" data-category="finish">
+                <i class="fa-solid fa-paint-roller"></i> التشطيبات
+            </button>
+            <button class="mat-tab" data-category="doors">
+                <i class="fa-solid fa-door-open"></i> الأبواب والنوافذ
+            </button>
+            <button class="mat-tab" data-category="plumbing">
+                <i class="fa-solid fa-faucet"></i> السباكة
+            </button>
+            <button class="mat-tab" data-category="electrical">
+                <i class="fa-solid fa-bolt"></i> الكهرباء
+            </button>
+        </div>
+
+        <div class="materials-grid" id="materialsGrid">
+            <!-- سيتم ملؤها بـ JavaScript -->
+        </div>
+    </section>
+
+    <!-- معرض التصاميم -->
+    <section class="section gallery-section" id="gallery">
+        <div class="section-header">
+            <span class="section-tag"><i class="fa-solid fa-wand-magic-sparkles"></i> معاينة</span>
+            <h2>معرض التصاميم الذكي</h2>
+            <p>شاهد تصاميم داخلية وخارجية بجودة عالية</p>
+        </div>
+
+        <div class="gallery-controls">
+            <div class="style-selector">
+                <label>نمط التصميم:</label>
+                <select id="designStyle">
+                    <option value="modern">عصري حديث</option>
+                    <option value="classic">كلاسيكي فاخر</option>
+                    <option value="minimalist">مينيمال</option>
+                    <option value="arabic">عربي تراثي</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="gallery-wrapper">
+            <div class="gallery-nav">
+                <button class="gallery-nav-btn active" data-room="exterior">
+                    <i class="fa-solid fa-home"></i>
+                    <span>الواجهة</span>
+                </button>
+                <button class="gallery-nav-btn" data-room="living">
+                    <i class="fa-solid fa-couch"></i>
+                    <span>الصالة</span>
+                </button>
+                <button class="gallery-nav-btn" data-room="bedroom">
+                    <i class="fa-solid fa-bed"></i>
+                    <span>غرفة النوم</span>
+                </button>
+                <button class="gallery-nav-btn" data-room="kitchen">
+                    <i class="fa-solid fa-utensils"></i>
+                    <span>المطبخ</span>
+                </button>
+                <button class="gallery-nav-btn" data-room="bathroom">
+                    <i class="fa-solid fa-bath"></i>
+                    <span>الحمام</span>
+                </button>
+            </div>
+
+            <div class="gallery-main">
+                <div class="main-image-container">
+                    <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1200" alt="التصميم"
+                        id="mainGalleryImg">
+                    <div class="image-label" id="imageLabel">واجهة فيلا عصرية</div>
+                </div>
+                <div class="thumbnail-row" id="thumbnailRow">
+                    <!-- سيتم ملؤها بـ JavaScript -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- مراحل البناء -->
+    <section class="section stages-section" id="stages">
+        <div class="section-header">
+            <span class="section-tag"><i class="fa-solid fa-list-check"></i> خطة العمل</span>
+            <h2>مراحل البناء خطوة بخطوة</h2>
+            <p>تعرف على كل مرحلة من مراحل بناء منزلك</p>
+        </div>
+
+        <div class="timeline">
+            <div class="timeline-item" data-stage="1">
+                <div class="timeline-icon"><i class="fa-solid fa-file-signature"></i></div>
+                <div class="timeline-content glass-card">
+                    <h3>التخطيط والتصاميم</h3>
+                    <p>اختيار المهندس، إعداد المخططات، الحصول على رخصة البناء</p>
+                    <span class="duration-tag"><i class="fa-solid fa-clock"></i> 1-2 شهر</span>
+                </div>
+            </div>
+            <div class="timeline-item" data-stage="2">
+                <div class="timeline-icon"><i class="fa-solid fa-digging"></i></div>
+                <div class="timeline-content glass-card">
+                    <h3>الحفر والأساسات</h3>
+                    <p>حفر الأرض، صب القواعد، أعمال العزل الأرضي</p>
+                    <span class="duration-tag"><i class="fa-solid fa-clock"></i> 2-3 أسابيع</span>
+                </div>
+            </div>
+            <div class="timeline-item" data-stage="3">
+                <div class="timeline-icon"><i class="fa-solid fa-building"></i></div>
+                <div class="timeline-content glass-card">
+                    <h3>الهيكل الإنشائي (العظم)</h3>
+                    <p>بناء الأعمدة والجدران وصب السقف</p>
+                    <span class="duration-tag"><i class="fa-solid fa-clock"></i> 3-5 أشهر</span>
+                </div>
+            </div>
+            <div class="timeline-item" data-stage="4">
+                <div class="timeline-icon"><i class="fa-solid fa-faucet-drip"></i></div>
+                <div class="timeline-content glass-card">
+                    <h3>أعمال السباكة والكهرباء</h3>
+                    <p>تمديدات المياه والصرف، الأسلاك والعلب الكهربائية</p>
+                    <span class="duration-tag"><i class="fa-solid fa-clock"></i> 1-2 شهر</span>
+                </div>
+            </div>
+            <div class="timeline-item" data-stage="5">
+                <div class="timeline-icon"><i class="fa-solid fa-paint-roller"></i></div>
+                <div class="timeline-content glass-card">
+                    <h3>التشطيبات الداخلية</h3>
+                    <p>البلاط، الدهانات، الجبس، تركيب الأبواب</p>
+                    <span class="duration-tag"><i class="fa-solid fa-clock"></i> 2-4 أشهر</span>
+                </div>
+            </div>
+            <div class="timeline-item" data-stage="6">
+                <div class="timeline-icon"><i class="fa-solid fa-key"></i></div>
+                <div class="timeline-content glass-card">
+                    <h3>التسليم النهائي</h3>
+                    <p>تركيب الإضاءة والأثاث، تنسيق الحدائق، استلام المفتاح</p>
+                    <span class="duration-tag"><i class="fa-solid fa-clock"></i> 2-4 أسابيع</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- نصائح البناء -->
+    <section class="section tips-section" id="tips">
+        <div class="section-header">
+            <span class="section-tag"><i class="fa-solid fa-lightbulb"></i> خبرات</span>
+            <h2>نصائح ذهبية من الخبراء</h2>
+            <p>وفر مالك ووقتك باتباع هذه النصائح المجربة</p>
+        </div>
+
+        <div class="tips-grid">
+            <div class="tip-card glass-card">
+                <div class="tip-icon warning"><i class="fa-solid fa-triangle-exclamation"></i></div>
+                <h4>لا توفر في الأساسات</h4>
+                <p>الأساسات هي عمود المبنى، أي توفير فيها قد يكلفك أضعافاً مضاعفة لاحقاً</p>
+            </div>
+            <div class="tip-card glass-card">
+                <div class="tip-icon success"><i class="fa-solid fa-check-circle"></i></div>
+                <h4>اختر مقاول موثوق</h4>
+                <p>تأكد من سمعة المقاول وأعماله السابقة قبل التوقيع</p>
+            </div>
+            <div class="tip-card glass-card">
+                <div class="tip-icon info"><i class="fa-solid fa-info-circle"></i></div>
+                <h4>العقد يحميك</h4>
+                <p>وثق كل شيء بعقد مكتوب يشمل المواصفات والأسعار والمدة</p>
+            </div>
+            <div class="tip-card glass-card">
+                <div class="tip-icon success"><i class="fa-solid fa-piggy-bank"></i></div>
+                <h4>اترك احتياطي 15-20%</h4>
+                <p>دائماً توقع مصاريف غير متوقعة واحتفظ بمبلغ احتياطي</p>
+            </div>
+            <div class="tip-card glass-card">
+                <div class="tip-icon warning"><i class="fa-solid fa-bolt"></i></div>
+                <h4>لا تبخل بالكهرباء</h4>
+                <p>ضع نقاط كهرباء إضافية، مستقبلاً ستحتاجها حتماً</p>
+            </div>
+            <div class="tip-card glass-card">
+                <div class="tip-icon info"><i class="fa-solid fa-sun"></i></div>
+                <h4>العزل يوفر الفواتير</h4>
+                <p>العزل الحراري الجيد يقلل فاتورة الكهرباء بشكل ملحوظ</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <div class="logo">
+                    <i class="fa-solid fa-building"></i>
+                    <span>المعمار الذكي</span>
+                </div>
+                <p>منصة متكاملة لتخطيط مشاريع البناء بالذكاء الاصطناعي</p>
+            </div>
+            <div class="footer-links">
+                <a href="#calculator">حاسبة التكلفة</a>
+                <a href="#materials">دليل المواد</a>
+                <a href="#gallery">معرض التصاميم</a>
+                <a href="#stages">مراحل البناء</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 جميع الحقوق محفوظة | تطوير وتصميم: <strong>عامر درزي العنزي</strong></p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

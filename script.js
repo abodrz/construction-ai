@@ -534,28 +534,20 @@ function initJoinModal() {
     form.addEventListener('submit', (e) => {
         e.preventDefault();
 
-        // محاكاة الإضافة
         const name = document.getElementById('contName').value;
         const specialty = document.getElementById('contSpecialty').value;
+        const phone = document.getElementById('contPhone').value;
 
-        const newContractor = {
-            name: name,
-            specialty: specialty,
-            rating: 5.0, // تقييم مبدئي
-            reviews: 0,
-            initial: name.charAt(0)
-        };
+        // تجهيز رسالة الواتساب
+        const message = `السلام عليكم، أرغب بالانضمام لمنصة المعمار الذكي كمقاول.\n\n👤 الاسم: ${name}\n🛠️ التخصص: ${specialty}\n📱 رقمي: ${phone}\n\nسأقوم بإرسال شهاداتي ونماذج أعمالي للتقييم.`;
 
-        contractorsData.unshift(newContractor); // إضافة في البداية
-        renderContractors();
+        const whatsappUrl = `https://wa.me/966566620279?text=${encodeURIComponent(message)}`;
+
+        // فتح الواتساب
+        window.open(whatsappUrl, '_blank');
 
         // إغلاق وتصفير
         closeModal();
         form.reset();
-
-        alert('تم تسجيلك بنجاح! ظهرت بطاقتك في القائمة فوراً 🚀');
-
-        // الذهاب للقسم
-        document.getElementById('contractors').scrollIntoView({ behavior: 'smooth' });
     });
 }

@@ -3,6 +3,19 @@
    تطوير: عامر درزي العنزي
    ============================================ */
 
+// ============ تسجيل Service Worker للـ PWA ============
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js')
+            .then((registration) => {
+                console.log('✅ Service Worker مسجل بنجاح:', registration.scope);
+            })
+            .catch((error) => {
+                console.log('❌ فشل تسجيل Service Worker:', error);
+            });
+    });
+}
+
 // ============ تهيئة الصفحة ============
 document.addEventListener('DOMContentLoaded', () => {
     initWelcomeModal();
@@ -10,6 +23,8 @@ document.addEventListener('DOMContentLoaded', () => {
     initMaterialsGrid();
     initGallery();
     initFormHandler();
+    initVideoModal();
+    initCalendarButtons();
 });
 
 // ============ نافذة الترحيب ============
@@ -394,3 +409,53 @@ document.querySelectorAll('.glass-card, .material-card, .tip-card, .timeline-ite
     el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
     fadeObserver.observe(el);
 });
+
+// ============ نافذة الفيديو ============
+function initVideoModal() {
+    const modal = document.getElementById('videoModal');
+    const btn = document.getElementById('watchJourneyBtn');
+    const closeBtn = document.querySelector('.close-video-btn');
+    const overlay = document.querySelector('.video-overlay');
+
+    if (!btn || !modal) return;
+
+    btn.addEventListener('click', () => {
+        modal.classList.remove('hidden');
+    });
+
+    const closeModal = () => {
+        modal.classList.add('hidden');
+    };
+
+    closeBtn.addEventListener('click', closeModal);
+    overlay.addEventListener('click', closeModal);
+}
+
+// ============ تذكير التقويم ============
+function initCalendarButtons() {
+    const buttons = document.querySelectorAll('.btn-calendar');
+
+    buttons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const stageName = btn.dataset.stage;
+            const offsetDays = parseInt(btn.dataset.offset);
+
+            // حساب التاريخ
+            const date = new Date();
+            date.setDate(date.getDate() + offsetDays);
+
+            // تنسيق التاريخ لـ Google Calendar (YYYYMMDD)
+            const isoDate = date.toISOString().replace(/-|:|\.\d\d\d/g, "");
+            const startDate = isoDate.substring(0, 8);
+            const endDate = isoDate.substring(0, 8); // نفس اليوم
+
+            const title = `مرحلة البناء: ${stageName}`;
+            const details = `تذكير ببدء مرحلة ${stageName} من مشروع منزلك - المعمار الذكي`;
+
+            // رابط Google Calendar
+            const url = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(title)}&dates=${startDate}/${endDate}&details=${encodeURIComponent(details)}`;
+
+            window.open(url, '_blank');
+        });
+    });
+}

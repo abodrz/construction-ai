@@ -49,6 +49,25 @@
         <div class="grid-overlay"></div>
     </div>
 
+    <!-- نافذة الفيديو -->
+    <div class="video-modal hidden" id="videoModal">
+        <div class="video-overlay"></div>
+        <div class="video-content glass-card">
+            <button class="close-video-btn"><i class="fa-solid fa-times"></i></button>
+            <div class="video-header">
+                <h3><i class="fa-solid fa-film"></i> رحلة البناء</h3>
+                <p>شاهد كيف سيتحول هذا التصميم إلى واقع</p>
+            </div>
+            <div class="video-wrapper">
+                <!-- Placeholder Video -->
+                <div class="video-placeholder">
+                    <i class="fa-solid fa-play-circle"></i>
+                    <span>جاري تحميل المحاكاة...</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- شريط التنقل -->
     <nav class="navbar">
         <div class="nav-container">
@@ -351,6 +370,9 @@
                     <option value="arabic">عربي تراثي</option>
                 </select>
             </div>
+            <button class="btn-primary pulse-glow" id="watchJourneyBtn">
+                <i class="fa-solid fa-play-circle"></i> شاهد رحلة البناء
+            </button>
         </div>
 
         <div class="gallery-wrapper">
@@ -404,7 +426,12 @@
                 <div class="timeline-content glass-card">
                     <h3>التخطيط والتصاميم</h3>
                     <p>اختيار المهندس، إعداد المخططات، الحصول على رخصة البناء</p>
-                    <span class="duration-tag"><i class="fa-solid fa-clock"></i> 1-2 شهر</span>
+                    <div class="stage-footer">
+                        <span class="duration-tag"><i class="fa-solid fa-clock"></i> 1-2 شهر</span>
+                        <button class="btn-calendar" data-stage="التخطيط والتصاميم" data-offset="0">
+                            <i class="fa-regular fa-calendar-plus"></i> ذكرني
+                        </button>
+                    </div>
                 </div>
             </div>
             <div class="timeline-item" data-stage="2">
@@ -412,7 +439,12 @@
                 <div class="timeline-content glass-card">
                     <h3>الحفر والأساسات</h3>
                     <p>حفر الأرض، صب القواعد، أعمال العزل الأرضي</p>
-                    <span class="duration-tag"><i class="fa-solid fa-clock"></i> 2-3 أسابيع</span>
+                    <div class="stage-footer">
+                        <span class="duration-tag"><i class="fa-solid fa-clock"></i> 2-3 أسابيع</span>
+                        <button class="btn-calendar" data-stage="الحفر والأساسات" data-offset="45">
+                            <i class="fa-regular fa-calendar-plus"></i> ذكرني
+                        </button>
+                    </div>
                 </div>
             </div>
             <div class="timeline-item" data-stage="3">
@@ -420,7 +452,12 @@
                 <div class="timeline-content glass-card">
                     <h3>الهيكل الإنشائي (العظم)</h3>
                     <p>بناء الأعمدة والجدران وصب السقف</p>
-                    <span class="duration-tag"><i class="fa-solid fa-clock"></i> 3-5 أشهر</span>
+                    <div class="stage-footer">
+                        <span class="duration-tag"><i class="fa-solid fa-clock"></i> 3-5 أشهر</span>
+                        <button class="btn-calendar" data-stage="الهيكل الإنشائي" data-offset="65">
+                            <i class="fa-regular fa-calendar-plus"></i> ذكرني
+                        </button>
+                    </div>
                 </div>
             </div>
             <div class="timeline-item" data-stage="4">
@@ -428,7 +465,12 @@
                 <div class="timeline-content glass-card">
                     <h3>أعمال السباكة والكهرباء</h3>
                     <p>تمديدات المياه والصرف، الأسلاك والعلب الكهربائية</p>
-                    <span class="duration-tag"><i class="fa-solid fa-clock"></i> 1-2 شهر</span>
+                    <div class="stage-footer">
+                        <span class="duration-tag"><i class="fa-solid fa-clock"></i> 1-2 شهر</span>
+                        <button class="btn-calendar" data-stage="السباكة والكهرباء" data-offset="180">
+                            <i class="fa-regular fa-calendar-plus"></i> ذكرني
+                        </button>
+                    </div>
                 </div>
             </div>
             <div class="timeline-item" data-stage="5">
@@ -436,7 +478,12 @@
                 <div class="timeline-content glass-card">
                     <h3>التشطيبات الداخلية</h3>
                     <p>البلاط، الدهانات، الجبس، تركيب الأبواب</p>
-                    <span class="duration-tag"><i class="fa-solid fa-clock"></i> 2-4 أشهر</span>
+                    <div class="stage-footer">
+                        <span class="duration-tag"><i class="fa-solid fa-clock"></i> 2-4 أشهر</span>
+                        <button class="btn-calendar" data-stage="التشطيبات الداخلية" data-offset="240">
+                            <i class="fa-regular fa-calendar-plus"></i> ذكرني
+                        </button>
+                    </div>
                 </div>
             </div>
             <div class="timeline-item" data-stage="6">
@@ -444,7 +491,12 @@
                 <div class="timeline-content glass-card">
                     <h3>التسليم النهائي</h3>
                     <p>تركيب الإضاءة والأثاث، تنسيق الحدائق، استلام المفتاح</p>
-                    <span class="duration-tag"><i class="fa-solid fa-clock"></i> 2-4 أسابيع</span>
+                    <div class="stage-footer">
+                        <span class="duration-tag"><i class="fa-solid fa-clock"></i> 2-4 أسابيع</span>
+                        <button class="btn-calendar" data-stage="استلام المفتاح" data-offset="360">
+                            <i class="fa-regular fa-calendar-plus"></i> ذكرني
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>

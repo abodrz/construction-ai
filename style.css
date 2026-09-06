@@ -1488,6 +1488,431 @@ option {
     animation: pulse 2s infinite;
 }
 
+/* ============ محاكي البناء ثلاثي الأبعاد 3D المتطور ============ */
+.simulator-modal .simulator-content {
+    max-width: 1200px;
+    width: 95%;
+    max-height: 94vh;
+    display: flex;
+    flex-direction: column;
+    background: rgba(10, 15, 29, 0.96);
+    border: 1px solid rgba(0, 212, 255, 0.35);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7), 0 0 40px rgba(0, 212, 255, 0.2);
+    border-radius: 20px;
+}
+
+.simulator-header {
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.simulator-title-box {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.sim-badge {
+    background: rgba(0, 212, 255, 0.15);
+    color: var(--primary);
+    border: 1px solid rgba(0, 212, 255, 0.4);
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.simulator-title-box h3 {
+    font-size: 1.15rem;
+    margin: 0;
+    color: #fff;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.simulator-main-wrapper {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+}
+
+/* شريط مراحل البناء التفاعلي */
+.stages-pills-bar {
+    display: flex;
+    gap: 0.5rem;
+    padding: 0.75rem 1.25rem;
+    background: rgba(0, 0, 0, 0.35);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    overflow-x: auto;
+    scrollbar-width: thin;
+}
+
+.stage-pill-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.5rem 1rem;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: var(--text-secondary);
+    font-family: var(--font-main);
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.stage-pill-btn .step-num {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 700;
+}
+
+.stage-pill-btn:hover {
+    background: rgba(0, 212, 255, 0.1);
+    border-color: rgba(0, 212, 255, 0.3);
+    color: #fff;
+}
+
+.stage-pill-btn.active {
+    background: rgba(0, 212, 255, 0.15);
+    border-color: var(--primary);
+    color: #fff;
+    box-shadow: 0 0 15px rgba(0, 212, 255, 0.25);
+}
+
+.stage-pill-btn.active .step-num {
+    background: var(--primary);
+    color: #000;
+}
+
+/* مساحة الكانفاس */
+.simulator-viewport-area {
+    position: relative;
+    width: 100%;
+    height: 520px;
+    overflow: hidden;
+    background: radial-gradient(circle at center, #111a33 0%, #080d1a 100%);
+}
+
+.canvas-container {
+    width: 100%;
+    height: 100%;
+}
+
+.canvas-container canvas {
+    display: block;
+    width: 100% !important;
+    height: 100% !important;
+    outline: none;
+    cursor: grab;
+}
+
+.canvas-container canvas:active {
+    cursor: grabbing;
+}
+
+/* شريط الأدوات العائم */
+.sim-floating-toolbar {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(10, 15, 29, 0.85);
+    backdrop-filter: blur(14px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    padding: 0.4rem 0.6rem;
+    border-radius: 14px;
+    z-index: 10;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+    flex-wrap: wrap;
+}
+
+.tool-btn {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: #fff;
+    padding: 0.45rem 0.85rem;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    font-family: var(--font-main);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.tool-btn:hover {
+    background: rgba(0, 212, 255, 0.2);
+    border-color: var(--primary);
+}
+
+.tool-btn.playing {
+    background: var(--accent);
+    border-color: #ffd166;
+    color: #000;
+    font-weight: 700;
+}
+
+.tool-btn.active {
+    background: rgba(0, 212, 255, 0.3);
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+.tool-divider {
+    width: 1px;
+    height: 22px;
+    background: rgba(255, 255, 255, 0.15);
+    margin: 0 0.2rem;
+}
+
+.tool-icon-btn {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--text-secondary);
+    width: 34px;
+    height: 34px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 0.85rem;
+}
+
+.tool-icon-btn:hover,
+.tool-icon-btn.active {
+    background: rgba(0, 212, 255, 0.2);
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+/* بطاقة HUD الذكية */
+.sim-hud-card {
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+    width: 320px;
+    background: rgba(10, 15, 29, 0.85) !important;
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(0, 212, 255, 0.25) !important;
+    border-radius: 14px;
+    padding: 1rem;
+    z-index: 10;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+    pointer-events: auto;
+}
+
+.hud-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.hud-tag {
+    font-size: 0.75rem;
+    color: var(--primary);
+    background: rgba(0, 212, 255, 0.1);
+    padding: 0.2rem 0.5rem;
+    border-radius: 6px;
+    font-weight: 700;
+}
+
+.hud-percent {
+    font-size: 1.1rem;
+    font-weight: 900;
+    color: #fff;
+    font-family: var(--font-english);
+}
+
+.hud-progress {
+    width: 100%;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 0.75rem;
+}
+
+.hud-progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--secondary), var(--primary));
+    transition: width 0.4s ease;
+}
+
+.hud-title {
+    font-size: 0.95rem;
+    margin: 0 0 0.7rem 0;
+    color: #fff;
+}
+
+.hud-metrics {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+    background: rgba(255, 255, 255, 0.03);
+    padding: 0.6rem;
+    border-radius: 8px;
+    margin-bottom: 0.6rem;
+}
+
+.hud-metric {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.hud-metric i {
+    color: var(--primary);
+    font-size: 0.9rem;
+}
+
+.hud-metric small {
+    display: block;
+    font-size: 0.65rem;
+    color: var(--text-muted);
+}
+
+.hud-metric strong {
+    display: block;
+    font-size: 0.8rem;
+    color: #fff;
+}
+
+.hud-materials {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.5rem;
+    line-height: 1.4;
+}
+
+.hud-materials small {
+    color: var(--accent);
+    display: block;
+    font-weight: 700;
+    margin-bottom: 0.2rem;
+}
+
+.hud-tip {
+    font-size: 0.72rem;
+    color: #d1d5db;
+    background: rgba(0, 212, 255, 0.05);
+    border-right: 3px solid var(--primary);
+    padding: 0.4rem 0.6rem;
+    border-radius: 4px;
+    display: flex;
+    gap: 0.4rem;
+    align-items: flex-start;
+    line-height: 1.35;
+}
+
+.hud-tip i {
+    color: var(--warning);
+    font-size: 0.8rem;
+    margin-top: 0.15rem;
+}
+
+.sim-help-hint {
+    position: absolute;
+    bottom: 1rem;
+    left: 1rem;
+    background: rgba(0, 0, 0, 0.65);
+    backdrop-filter: blur(8px);
+    padding: 0.4rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.72rem;
+    color: var(--text-secondary);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.nav-3d-btn {
+    color: var(--primary) !important;
+    font-weight: 700;
+    position: relative;
+}
+
+.nav-3d-btn::after {
+    content: 'جديد';
+    position: absolute;
+    top: -6px;
+    left: -8px;
+    background: var(--secondary);
+    color: #fff;
+    font-size: 0.6rem;
+    padding: 1px 5px;
+    border-radius: 8px;
+    font-weight: 800;
+}
+
+.btn-simulator-trigger {
+    background: linear-gradient(135deg, #00d4ff, #7c3aed) !important;
+    font-weight: 700;
+}
+
+/* تجاوب الشاشات للمحاكي */
+@media (max-width: 992px) {
+    .simulator-viewport-area {
+        height: 440px;
+    }
+    .sim-hud-card {
+        position: static;
+        width: 100%;
+        border-radius: 0;
+    }
+    .sim-floating-toolbar {
+        top: 0.5rem;
+        left: 0.5rem;
+        right: 0.5rem;
+        justify-content: center;
+    }
+    .sim-help-hint {
+        display: none;
+    }
+}
+
+@media (max-width: 600px) {
+    .simulator-viewport-area {
+        height: 360px;
+    }
+    .sim-view-toggle {
+        margin-left: 0;
+        width: 100%;
+        justify-content: center;
+    }
+}
+
 /* ============ أزرار التقويم ============ */
 .stage-footer {
     display: flex;

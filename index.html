@@ -49,20 +49,109 @@
         <div class="grid-overlay"></div>
     </div>
 
-    <!-- نافذة الفيديو -->
-    <div class="video-modal hidden" id="videoModal">
+    <!-- نافذة محاكي البناء ثلاثي الأبعاد 3D التفاعلي -->
+    <div class="video-modal simulator-modal hidden" id="videoModal">
         <div class="video-overlay"></div>
-        <div class="video-content glass-card">
-            <button class="close-video-btn"><i class="fa-solid fa-times"></i></button>
-            <div class="video-header">
-                <h3><i class="fa-solid fa-film"></i> رحلة البناء</h3>
-                <p>شاهد كيف سيتحول هذا التصميم إلى واقع</p>
+        <div class="video-content glass-card simulator-content">
+            <button class="close-video-btn" title="إغلاق"><i class="fa-solid fa-times"></i></button>
+            
+            <div class="simulator-header">
+                <div class="simulator-title-box">
+                    <span class="sim-badge"><i class="fa-solid fa-cube"></i> محاكي تفاعلي 3D</span>
+                    <h3>محاكي البناء الذكي | رحلة تشييد الفيلا العصرية</h3>
+                </div>
             </div>
-            <div class="video-wrapper">
-                <iframe width="100%" height="100%" src="https://www.youtube.com/embed/fkVfX2hUlc8?autoplay=1&mute=1"
-                    title="Modern House Construction Timelapse" frameborder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowfullscreen></iframe>
+
+            <!-- محتوى المحاكي 3D -->
+            <div class="simulator-main-wrapper" id="sim3DWrapper">
+                <!-- شريط مراحل البناء التفاعلي -->
+                <div class="stages-pills-bar">
+                    <button class="stage-pill-btn active" data-stage="1">
+                        <span class="step-num">1</span>
+                        <span class="step-text">تجهيز الموقع والحفر</span>
+                    </button>
+                    <button class="stage-pill-btn" data-stage="2">
+                        <span class="step-num">2</span>
+                        <span class="step-text">القواعد والأساسات</span>
+                    </button>
+                    <button class="stage-pill-btn" data-stage="3">
+                        <span class="step-num">3</span>
+                        <span class="step-text">الهيكل والأعمدة</span>
+                    </button>
+                    <button class="stage-pill-btn" data-stage="4">
+                        <span class="step-num">4</span>
+                        <span class="step-text">الجدران والبلوك</span>
+                    </button>
+                    <button class="stage-pill-btn" data-stage="5">
+                        <span class="step-num">5</span>
+                        <span class="step-text">التشطيبات والواجهات</span>
+                    </button>
+                </div>
+
+                <div class="simulator-viewport-area">
+                    <!-- مساحة عرض Three.js -->
+                    <div id="canvas3dContainer" class="canvas-container"></div>
+
+                    <!-- شريط أدوات التحكم السريعة -->
+                    <div class="sim-floating-toolbar">
+                        <button class="tool-btn pulse-glow" id="btnAutoPlay3D" title="تشغيل البناء التلقائي التتابعي">
+                            <i class="fa-solid fa-play"></i> تشغيل البناء التلقائي
+                        </button>
+                        <button class="tool-btn" id="btnDayNight3D" title="تبديل الإضاءة (نهار / ليل)">
+                            <i class="fa-solid fa-moon"></i> الوضع الليلي
+                        </button>
+                        <button class="tool-btn" id="btnXRay3D" title="رؤية الهيكل الإنشائي الداخلي">
+                            <i class="fa-solid fa-bone"></i> وضع الأشعة (X-Ray)
+                        </button>
+                        <div class="tool-divider"></div>
+                        <button class="tool-icon-btn active" id="camIsoBtn" title="منظور إيزومترك (زاوية)"><i class="fa-solid fa-shapes"></i></button>
+                        <button class="tool-icon-btn" id="camDroneBtn" title="منظور علوي (درون)"><i class="fa-solid fa-helicopter"></i></button>
+                        <button class="tool-icon-btn" id="camFrontBtn" title="الواجهة الأمامية"><i class="fa-solid fa-building"></i></button>
+                        <button class="tool-icon-btn" id="camPoolBtn" title="المسبح واللاندسكيب"><i class="fa-solid fa-water-ladder"></i></button>
+                        <button class="tool-icon-btn" id="camResetBtn" title="إعادة ضبط الكاميرا"><i class="fa-solid fa-arrows-rotate"></i></button>
+                    </div>
+
+                    <!-- بطاقة بيانات الذكاء الاصطناعي الهندسية HUD -->
+                    <div class="sim-hud-card glass-card">
+                        <div class="hud-header">
+                            <span class="hud-tag" id="hudStageTag">الأعمال الترابية والتمهيد</span>
+                            <span class="hud-percent" id="hudStagePercent">15%</span>
+                        </div>
+                        <div class="hud-progress">
+                            <div class="hud-progress-bar" id="hudProgressBar" style="width: 15%"></div>
+                        </div>
+                        <h4 class="hud-title" id="hudStageTitle">المرحلة الأولى: تجهيز الموقع والحفر</h4>
+                        <div class="hud-metrics">
+                            <div class="hud-metric">
+                                <i class="fa-solid fa-sack-dollar"></i>
+                                <div>
+                                    <small>التكلفة التقديرية</small>
+                                    <strong id="hudStageCost">25,000 - 45,000 ر.س</strong>
+                                </div>
+                            </div>
+                            <div class="hud-metric">
+                                <i class="fa-solid fa-calendar-days"></i>
+                                <div>
+                                    <small>المدة الزمنية</small>
+                                    <strong id="hudStageDuration">2 - 3 أسابيع</strong>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="hud-materials">
+                            <small><i class="fa-solid fa-cubes"></i> المواد الرئيسية:</small>
+                            <span id="hudStageMaterials">حفر صخري، دمك تربة، صبة نظافة 10سم، سياج أمني</span>
+                        </div>
+                        <div class="hud-tip">
+                            <i class="fa-solid fa-lightbulb"></i>
+                            <span id="hudStageTip">احرص على إجراء اختبار فحص التربة (Soil Test) لتحديد عمق التأسيس ونوعية القواعد المناسبة بدقة.</span>
+                        </div>
+                    </div>
+
+                    <!-- إرشاد تفاعل الماوس واللمس -->
+                    <div class="sim-help-hint">
+                        <i class="fa-solid fa-hand-pointer"></i> اسحب للتدوير 360° | حرك البكرة للتكبير | انقر فوق أزرار المراحل
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -83,6 +172,7 @@
                 <a href="#calculator" class="nav-link"><i class="fa-solid fa-calculator"></i> حاسبة التكلفة</a>
                 <a href="#materials" class="nav-link"><i class="fa-solid fa-cubes"></i> المواد</a>
                 <a href="#gallery" class="nav-link"><i class="fa-solid fa-images"></i> المعرض</a>
+                <a href="javascript:void(0)" class="nav-link nav-3d-btn" id="nav3dBtn"><i class="fa-solid fa-cube"></i> محاكي 3D</a>
                 <a href="#stages" class="nav-link"><i class="fa-solid fa-list-check"></i> المراحل</a>
                 <a href="#tips" class="nav-link"><i class="fa-solid fa-lightbulb"></i> نصائح</a>
             </div>
@@ -207,10 +297,18 @@
                             <label><i class="fa-solid fa-map-marker-alt"></i> المنطقة</label>
                             <select id="region">
                                 <option value="riyadh">الرياض</option>
+                                <option value="hail">حائل</option>
+                                <option value="qassim">القصيم (بريدة / عنيزة)</option>
                                 <option value="jeddah">جدة</option>
-                                <option value="eastern">المنطقة الشرقية</option>
                                 <option value="makkah">مكة المكرمة</option>
                                 <option value="madinah">المدينة المنورة</option>
+                                <option value="eastern">المنطقة الشرقية (الدمام / الخبر / الأحساء)</option>
+                                <option value="abha">عسير / أبها / خميس مشيط</option>
+                                <option value="tabuk">تبوك / نيوم</option>
+                                <option value="taif">الطائف</option>
+                                <option value="jouf">الجوف / الحدود الشمالية</option>
+                                <option value="jazan">جازان / نجران</option>
+                                <option value="baha">الباحة</option>
                                 <option value="other">مناطق أخرى</option>
                             </select>
                         </div>
@@ -413,8 +511,8 @@
                     <option value="arabic">عربي تراثي</option>
                 </select>
             </div>
-            <button class="btn-primary pulse-glow" id="watchJourneyBtn">
-                <i class="fa-solid fa-play-circle"></i> شاهد رحلة البناء
+            <button class="btn-primary pulse-glow btn-simulator-trigger" id="watchJourneyBtn">
+                <i class="fa-solid fa-cube"></i> محاكي البناء 3D التفاعلي
             </button>
         </div>
 
@@ -657,6 +755,10 @@
         </div>
     </footer>
 
+    <!-- محرك 3D ثلاثي الأبعاد (Three.js & OrbitControls) ملفات محلية سريعة وموثوقة 100% -->
+    <script src="three.min.js"></script>
+    <script src="OrbitControls.js"></script>
+    <script src="construction3d.js"></script>
     <script src="script.js"></script>
 </body>
 

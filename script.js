@@ -84,47 +84,47 @@ function animateCounter(element, target) {
     }, 30);
 }
 
-// ============ قاعدة بيانات المواد ============
+// ============ قاعدة بيانات المواد (محدثة لأسعار السوق السعودي 2026) ============
 const materialsData = {
     structure: [
-        { name: 'حديد تسليح', desc: 'حديد سابك درجة 60', price: '2,800', unit: 'طن', icon: 'fa-solid fa-bars' },
-        { name: 'أسمنت', desc: 'أسمنت بورتلاندي عادي', price: '18', unit: 'كيس 50 كجم', icon: 'fa-solid fa-cube' },
-        { name: 'بلوك أسمنتي', desc: 'بلوك 20×20×40', price: '2.5', unit: 'حبة', icon: 'fa-solid fa-cubes' },
-        { name: 'رمل', desc: 'رمل ناعم للخلطات', price: '80', unit: 'متر مكعب', icon: 'fa-solid fa-mound' },
-        { name: 'خرسانة جاهزة', desc: 'خرسانة B350', price: '280', unit: 'متر مكعب', icon: 'fa-solid fa-truck-ramp-box' },
-        { name: 'عزل مائي', desc: 'لفائف بيتومين', price: '85', unit: 'م²', icon: 'fa-solid fa-droplet-slash' }
+        { name: 'حديد تسليح', desc: 'حديد سابك / الراجحي درجة 60', price: '2,950', unit: 'طن', icon: 'fa-solid fa-bars' },
+        { name: 'أسمنت بورتلاندي', desc: 'أسمنت عادي ومقاوم', price: '16.5', unit: 'كيس 50 كجم', icon: 'fa-solid fa-cube' },
+        { name: 'بلوك أسمنتي معزول', desc: 'بلوك 20×20×40 معزول', price: '3.8', unit: 'حبة', icon: 'fa-solid fa-cubes' },
+        { name: 'رمل ناعم مغسول', desc: 'رمل ناعم للخلطات واللياسة', price: '55', unit: 'متر مكعب', icon: 'fa-solid fa-mound' },
+        { name: 'خرسانة جاهزة', desc: 'خرسانة C35 / B350 مقاومة', price: '250', unit: 'متر مكعب', icon: 'fa-solid fa-truck-ramp-box' },
+        { name: 'عزل مائي وحراري', desc: 'لفائف بيتومين مع فوم بوليسترين', price: '55', unit: 'م²', icon: 'fa-solid fa-droplet-slash' }
     ],
     finish: [
-        { name: 'سيراميك أرضيات', desc: 'سيراميك 60×60 درجة أولى', price: '45', unit: 'م²', icon: 'fa-solid fa-square' },
-        { name: 'بورسلان فاخر', desc: 'بورسلان إسباني لامع', price: '120', unit: 'م²', icon: 'fa-solid fa-gem' },
-        { name: 'رخام طبيعي', desc: 'رخام كريما مارفيل', price: '350', unit: 'م²', icon: 'fa-solid fa-mountain' },
-        { name: 'جرانيت', desc: 'جرانيت أسود جلاكسي', price: '280', unit: 'م²', icon: 'fa-solid fa-layer-group' },
-        { name: 'دهانات جوتن', desc: 'دهان جوتن فينوماستيك', price: '380', unit: 'جالون', icon: 'fa-solid fa-paint-roller' },
-        { name: 'جبس بورد', desc: 'ألواح جبس مع التركيب', price: '65', unit: 'م²', icon: 'fa-solid fa-expand' }
+        { name: 'سيراميك أرضيات', desc: 'سيراميك 60×60 نخب أول', price: '42', unit: 'م²', icon: 'fa-solid fa-square' },
+        { name: 'بورسلان فاخر', desc: 'بورسلان إسباني / هندي فرز أول', price: '85', unit: 'م²', icon: 'fa-solid fa-gem' },
+        { name: 'رخام طبيعي', desc: 'رخام روزا / عماني فرز أول', price: '240', unit: 'م²', icon: 'fa-solid fa-mountain' },
+        { name: 'جرانيت طبيعي', desc: 'جرانيت أرضيات وواجهات', price: '210', unit: 'م²', icon: 'fa-solid fa-layer-group' },
+        { name: 'دهانات جوتن / الجزيرة', desc: 'دهان جوتن فينوماستيك نص لمعة', price: '320', unit: 'برميل 18L', icon: 'fa-solid fa-paint-roller' },
+        { name: 'جبس بورد أسقف', desc: 'ألواح جبسية شاملة التوريد والتركيب', price: '55', unit: 'م²', icon: 'fa-solid fa-expand' }
     ],
     doors: [
-        { name: 'باب خشب رئيسي', desc: 'خشب زان طبيعي منحوت', price: '3,500', unit: 'حبة', icon: 'fa-solid fa-door-closed' },
-        { name: 'باب غرف داخلي', desc: 'خشب HDF مع إطار', price: '850', unit: 'حبة', icon: 'fa-solid fa-door-open' },
-        { name: 'نافذة ألومنيوم', desc: 'ألومنيوم دبل جلاس', price: '750', unit: 'م²', icon: 'fa-solid fa-window-maximize' },
-        { name: 'باب حديد', desc: 'باب حديد مشغول للحوش', price: '2,800', unit: 'م²', icon: 'fa-solid fa-window-restore' },
-        { name: 'شتر كهربائي', desc: 'شتر ألومنيوم مع موتور', price: '1,200', unit: 'م²', icon: 'fa-solid fa-blinds' },
-        { name: 'باب ذكي', desc: 'باب ببصمة ورمز سري', price: '4,500', unit: 'حبة', icon: 'fa-solid fa-fingerprint' }
+        { name: 'باب خشب رئيسي', desc: 'خشب زان طبيعي مقوى', price: '2,800', unit: 'حبة', icon: 'fa-solid fa-door-closed' },
+        { name: 'باب غرف داخلي', desc: 'خشب HDF مع الإطار والمقبض', price: '750', unit: 'حبة', icon: 'fa-solid fa-door-open' },
+        { name: 'نافذة ألومنيوم', desc: 'ألومنيوم دبل جلاس سرايا', price: '550', unit: 'م²', icon: 'fa-solid fa-window-maximize' },
+        { name: 'باب حديد ليزر', desc: 'حديد مشغول ليزر للحوش', price: '1,800', unit: 'م²', icon: 'fa-solid fa-window-restore' },
+        { name: 'شتر كهربائي', desc: 'شتر ألومنيوم مع محرك سومفي', price: '850', unit: 'م²', icon: 'fa-solid fa-blinds' },
+        { name: 'باب ذكي', desc: 'قفل ذكي بصمة وكارت ورمز', price: '1,800', unit: 'حبة', icon: 'fa-solid fa-fingerprint' }
     ],
     plumbing: [
-        { name: 'خزان مياه', desc: 'خزان بلاستيك 2000 لتر', price: '1,200', unit: 'حبة', icon: 'fa-solid fa-droplet' },
-        { name: 'سخان مياه', desc: 'سخان كهربائي 50 لتر', price: '850', unit: 'حبة', icon: 'fa-solid fa-temperature-high' },
-        { name: 'مغسلة حمام', desc: 'مغسلة سيراميك مع خلاط', price: '650', unit: 'طقم', icon: 'fa-solid fa-sink' },
-        { name: 'كرسي حمام', desc: 'كرسي أفرنجي معلق', price: '1,100', unit: 'حبة', icon: 'fa-solid fa-toilet' },
-        { name: 'بانيو', desc: 'بانيو أكريليك 170 سم', price: '1,800', unit: 'حبة', icon: 'fa-solid fa-bath' },
-        { name: 'مضخة مياه', desc: 'مضخة 1 حصان أوتوماتيك', price: '950', unit: 'حبة', icon: 'fa-solid fa-faucet-drip' }
+        { name: 'خزان مياه علوي', desc: 'خزان الزامل 4 طبقات 2000L', price: '1,100', unit: 'حبة', icon: 'fa-solid fa-droplet' },
+        { name: 'سخان مياه الخزف', desc: 'سخان كهربائي 50 لتر', price: '420', unit: 'حبة', icon: 'fa-solid fa-temperature-high' },
+        { name: 'مغسلة حمام مودرن', desc: 'مغسلة رخام صناعي مع الخلاط', price: '550', unit: 'طقم', icon: 'fa-solid fa-sink' },
+        { name: 'كرسي حمام معلق', desc: 'كرسي أفرنجي جروهي معلق', price: '850', unit: 'حبة', icon: 'fa-solid fa-toilet' },
+        { name: 'بانيو / دش مطري', desc: 'طقم شاور مع خلاط مخفي', price: '1,200', unit: 'طقم', icon: 'fa-solid fa-bath' },
+        { name: 'مضخة مياه اتوماتيك', desc: 'مضخة سكالا 2 إيطالية', price: '1,450', unit: 'حبة', icon: 'fa-solid fa-faucet-drip' }
     ],
     electrical: [
-        { name: 'لوحة توزيع', desc: 'لوحة 24 خط ABB', price: '1,200', unit: 'حبة', icon: 'fa-solid fa-table-cells' },
-        { name: 'أسلاك كهرباء', desc: 'أسلاك نحاس 2.5 مم', price: '3.5', unit: 'متر', icon: 'fa-solid fa-plug-circle-bolt' },
-        { name: 'مفتاح إضاءة ذكي', desc: 'مفتاح WiFi تحكم صوتي', price: '180', unit: 'حبة', icon: 'fa-solid fa-toggle-on' },
-        { name: 'سبوت لايت', desc: 'سبوت LED 12 وات', price: '45', unit: 'حبة', icon: 'fa-solid fa-lightbulb' },
-        { name: 'ثريا كريستال', desc: 'ثريا فاخرة 12 ذراع', price: '3,500', unit: 'حبة', icon: 'fa-solid fa-chandelier' },
-        { name: 'نظام طاقة شمسية', desc: 'نظام 5 كيلو وات', price: '25,000', unit: 'نظام كامل', icon: 'fa-solid fa-solar-panel' }
+        { name: 'لوحة توزيع كهرباء', desc: 'لوحة 24 خط الفنار / شنايدر', price: '850', unit: 'حبة', icon: 'fa-solid fa-table-cells' },
+        { name: 'أسلاك كهرباء', desc: 'أسلاك نحاس الفنار 2.5 مم', price: '2.8', unit: 'متر', icon: 'fa-solid fa-plug-circle-bolt' },
+        { name: 'مفتاح ذكي WiFi', desc: 'مفتاح تويا سمارت 3 أزرار', price: '110', unit: 'حبة', icon: 'fa-solid fa-toggle-on' },
+        { name: 'سبوت لايت LED', desc: 'سبوت ضد الوهج 7-12 واط', price: '28', unit: 'حبة', icon: 'fa-solid fa-lightbulb' },
+        { name: 'ثريا مودرن', desc: 'ثريا مودرن للصالة والمجلس', price: '1,200', unit: 'حبة', icon: 'fa-solid fa-chandelier' },
+        { name: 'نظام طاقة شمسية', desc: 'نظام 5 كيلو واط شبكي', price: '22,000', unit: 'نظام كامل', icon: 'fa-solid fa-solar-panel' }
     ]
 };
 
@@ -280,58 +280,66 @@ function calculateCost() {
         return;
     }
 
-    // الأسعار الأساسية (ريال/متر)
+    // الأسعار الأساسية الواقعية في السوق السعودي (ريال/متر بناء مسطح)
     const baseRates = {
-        villa: 1600,
-        duplex: 1500,
-        apartment: 1400,
-        building: 1800,
-        commercial: 2000,
-        warehouse: 1200
+        villa: 1500,        // فيلا سكنية (عظم + تشطيب ديلوكس)
+        duplex: 1450,       // دوبلكس
+        apartment: 1350,    // شقة / عمارة سكنية
+        building: 1650,     // عمارة تجارية سكنية
+        commercial: 1850,   // مجمع تجاري
+        warehouse: 950      // مستودع / هنجر
     };
 
-    // معاملات التشطيب
+    // معاملات التشطيب الواقعية
     const finishMultipliers = {
-        economy: 0.75,
-        standard: 1.0,
-        luxury: 1.4,
-        ultra: 1.8,
-        smart: 2.0
+        economy: 0.70,     // اقتصادي (تجاري)
+        standard: 1.0,      // ديلوكس (قياسي)
+        luxury: 1.35,      // سوبر ديلوكس
+        ultra: 1.70,       // ألترا لوكس VIP
+        smart: 1.90        // منزل ذكي بالكامل
     };
 
-    // معاملات المنطقة
+    // معاملات المناطق المحدثة والواقعية بالسوق السعودي
     const regionMultipliers = {
-        riyadh: 1.0,
-        jeddah: 1.05,
-        eastern: 0.95,
-        makkah: 1.1,
-        madinah: 1.08,
-        other: 0.9
+        riyadh: 1.0,        // الرياض (المعيار الأساسي)
+        hail: 0.92,         // حائل
+        qassim: 0.93,       // القصيم (بريدة / عنيزة)
+        jeddah: 1.04,       // جدة
+        makkah: 1.08,       // مكة المكرمة
+        madinah: 1.02,      // المدينة المنورة
+        eastern: 0.98,      // المنطقة الشرقية والأحساء
+        abha: 0.95,         // عسير وأبها وخميس مشيط
+        tabuk: 0.96,        // تبوك ونيوم
+        taif: 0.95,         // الطائف
+        jouf: 0.91,         // الجوف والحدود الشمالية
+        jazan: 0.93,        // جازان ونجران
+        baha: 0.94,         // الباحة
+        other: 0.94         // مناطق أخرى
     };
 
     // الحسابات
     const totalArea = area * floors;
-    const baseRate = baseRates[type];
-    const finishMult = finishMultipliers[finish];
-    const regionMult = regionMultipliers[region];
+    const baseRate = baseRates[type] || 1500;
+    const finishMult = finishMultipliers[finish] || 1.0;
+    const regionMult = regionMultipliers[region] || 1.0;
 
-    // تكلفة العظم (40% من الإجمالي)
-    const structureCost = Math.round(totalArea * baseRate * 0.4 * regionMult);
+    // تكلفة العظم بالمواد (~42% من التكلفة الأساسية)
+    const structureCost = Math.round(totalArea * baseRate * 0.42 * regionMult);
 
-    // تكلفة التشطيب (35% من الإجمالي)
-    const finishCost = Math.round(totalArea * baseRate * 0.35 * finishMult * regionMult);
+    // تكلفة التشطيب (~43% من التكلفة)
+    const finishCost = Math.round(totalArea * baseRate * 0.43 * finishMult * regionMult);
 
-    // تكلفة الكهرباء والسباكة (15%)
+    // تكلفة الكهرباء والسباكة والتكييف (~15%)
     const mecCost = Math.round(totalArea * baseRate * 0.15 * regionMult);
 
-    // الإضافات
+    // الإضافات بأسعار واقعية ومحدثة بالسوق السعودي
     let extrasCost = 0;
-    if (hasBasement) extrasCost += area * 800;
-    if (hasPool) extrasCost += 80000;
-    if (hasElevator) extrasCost += 120000;
-    if (hasSolar) extrasCost += 35000;
-    if (hasSmartHome) extrasCost += 50000;
-    if (hasGarden) extrasCost += 30000;
+    if (hasBasement) extrasCost += area * 650;      // 650 ر.س للمتر المربع للقبو
+    if (hasPool) extrasCost += 55000;              // 55,000 ر.س مسبح كامل
+    if (hasElevator) extrasCost += 75000;           // 75,000 ر.س مصعد 3 وقفات كامل
+    if (hasSolar) extrasCost += 22000;              // 22,000 ر.س طاقة شمسية 5KW
+    if (hasSmartHome) extrasCost += 25000;          // 25,000 ر.س تأسيس سمارت هوم
+    if (hasGarden) extrasCost += 20000;             // 20,000 ر.س تنسيق حوش وحديقة
 
     const totalCost = structureCost + finishCost + mecCost + extrasCost;
 
@@ -436,25 +444,117 @@ document.querySelectorAll('.glass-card, .material-card, .tip-card, .timeline-ite
     fadeObserver.observe(el);
 });
 
-// ============ نافذة الفيديو ============
+// ============ محاكي البناء ثلاثي الأبعاد 3D ============
+let constructionSimulatorInstance = null;
+
 function initVideoModal() {
     const modal = document.getElementById('videoModal');
     const btn = document.getElementById('watchJourneyBtn');
+    const navBtn = document.getElementById('nav3dBtn');
     const closeBtn = document.querySelector('.close-video-btn');
     const overlay = document.querySelector('.video-overlay');
 
-    if (!btn || !modal) return;
+    if (!modal) return;
 
-    btn.addEventListener('click', () => {
+    const openSimulator = () => {
         modal.classList.remove('hidden');
-    });
+        document.body.style.overflow = 'hidden';
+
+        // تهيئة محرك 3D عند أول فتح
+        if (!constructionSimulatorInstance && typeof ConstructionSimulator3D !== 'undefined') {
+            setTimeout(() => {
+                constructionSimulatorInstance = new ConstructionSimulator3D('canvas3dContainer');
+                initSimulatorControls();
+            }, 100);
+        } else if (constructionSimulatorInstance) {
+            setTimeout(() => {
+                constructionSimulatorInstance.onWindowResize();
+            }, 150);
+        }
+    };
+
+    if (btn) btn.addEventListener('click', openSimulator);
+    if (navBtn) navBtn.addEventListener('click', openSimulator);
 
     const closeModal = () => {
         modal.classList.add('hidden');
+        document.body.style.overflow = '';
+        if (constructionSimulatorInstance && constructionSimulatorInstance.isAutoPlaying) {
+            constructionSimulatorInstance.toggleAutoPlay();
+        }
     };
 
-    closeBtn.addEventListener('click', closeModal);
-    overlay.addEventListener('click', closeModal);
+    if (closeBtn) closeBtn.addEventListener('click', closeModal);
+    if (overlay) overlay.addEventListener('click', closeModal);
+}
+
+function initSimulatorControls() {
+    if (!constructionSimulatorInstance) return;
+
+    // أزرار مراحل البناء
+    const stageBtns = document.querySelectorAll('.stage-pill-btn');
+    stageBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const stage = parseInt(btn.getAttribute('data-stage'), 10);
+            if (constructionSimulatorInstance.isAutoPlaying) {
+                constructionSimulatorInstance.toggleAutoPlay();
+            }
+            constructionSimulatorInstance.setStage(stage);
+        });
+    });
+
+    // زر التشغيل التلقائي (التايم لابس)
+    const autoPlayBtn = document.getElementById('btnAutoPlay3D');
+    if (autoPlayBtn) {
+        autoPlayBtn.addEventListener('click', () => {
+            constructionSimulatorInstance.toggleAutoPlay();
+        });
+    }
+
+    // زر التبديل الليلي والنهاري
+    const dayNightBtn = document.getElementById('btnDayNight3D');
+    if (dayNightBtn) {
+        dayNightBtn.addEventListener('click', () => {
+            constructionSimulatorInstance.toggleDayNight();
+        });
+    }
+
+    // زر الأشعة السينية (X-Ray)
+    const xRayBtn = document.getElementById('btnXRay3D');
+    if (xRayBtn) {
+        xRayBtn.addEventListener('click', () => {
+            constructionSimulatorInstance.toggleXRay();
+        });
+    }
+
+    // أزرار زوايا الكاميرا
+    const camButtons = [
+        { id: 'camIsoBtn', view: 'isometric' },
+        { id: 'camDroneBtn', view: 'drone' },
+        { id: 'camFrontBtn', view: 'front' },
+        { id: 'camPoolBtn', view: 'pool' }
+    ];
+
+    camButtons.forEach(cb => {
+        const el = document.getElementById(cb.id);
+        if (el) {
+            el.addEventListener('click', () => {
+                document.querySelectorAll('.tool-icon-btn').forEach(b => b.classList.remove('active'));
+                el.classList.add('active');
+                constructionSimulatorInstance.setCameraView(cb.view);
+            });
+        }
+    });
+
+    const resetBtn = document.getElementById('camResetBtn');
+    if (resetBtn) {
+        resetBtn.addEventListener('click', () => {
+            document.querySelectorAll('.tool-icon-btn').forEach(b => b.classList.remove('active'));
+            const iso = document.getElementById('camIsoBtn');
+            if (iso) iso.classList.add('active');
+            constructionSimulatorInstance.resetCamera();
+        });
+    }
 }
 
 // ============ تذكير التقويم ============

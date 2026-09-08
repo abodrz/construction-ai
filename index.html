@@ -15,7 +15,7 @@
     <link rel="manifest" href="manifest.json">
     <link rel="apple-touch-icon" href="logo.png">
 
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css?v=3.5">
     <link
         href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700;900&family=Tajawal:wght@400;500;700;900&display=swap"
         rel="stylesheet">
@@ -608,13 +608,13 @@
         <div class="ba-slider-container glass-card" id="baSliderContainer">
             <!-- صورة قبل (عظم وإنشاء) -->
             <div class="ba-image-layer ba-before">
-                <img src="images/villa_before.jpg" alt="مرحلة العظم والأساسات الإنشائية" />
+                <img src="villa_before.jpg" onerror="this.src='images/villa_before.jpg'" alt="مرحلة العظم والأساسات الإنشائية" />
                 <span class="ba-tag tag-before"><i class="fa-solid fa-trowel-bricks"></i> قبل: الهيكل الإنشائي والعظم</span>
             </div>
 
             <!-- صورة بعد (فيلا فاخرة مكتملة) مع طبقة القطع -->
             <div class="ba-image-layer ba-after" id="baAfterLayer">
-                <img src="images/villa_after.jpg" alt="الفيلا بعد التشطيب الفاخر والمسبح" />
+                <img src="villa_after.jpg" onerror="this.src='images/villa_after.jpg'" alt="الفيلا بعد التشطيب الفاخر والمسبح" />
                 <span class="ba-tag tag-after"><i class="fa-solid fa-wand-magic-sparkles"></i> بعد: التشطيب الفاخر والمسبح</span>
             </div>
 
@@ -930,8 +930,8 @@
     <!-- محرك 3D ثلاثي الأبعاد (Three.js & OrbitControls) ملفات محلية سريعة وموثوقة 100% -->
     <script src="three.min.js"></script>
     <script src="OrbitControls.js"></script>
-    <script src="construction3d.js"></script>
-    <script src="script.js"></script>
+    <script src="construction3d.js?v=3.5"></script>
+    <script src="script.js?v=3.5"></script>
     <!-- زر ونافذة المستشار المعماري الصوتي الذكي (Voice AI Assistant) -->
     <button class="voice-ai-trigger" id="voiceAiTrigger" title="تحدث مع المستشار المعماري الذكي">
         <div class="voice-pulse-ring"></div>

@@ -100,14 +100,14 @@
     width: 100px;
     height: 100px;
     margin: 0 auto 2rem;
-    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    background: linear-gradient(135deg, #c5a059, #8c6a28) !important;
     border-radius: 30px;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 3rem;
-    color: white;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+    color: #0b0f17 !important;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 30px rgba(197, 160, 89, 0.3) !important;
     animation: iconFloat 3s ease-in-out infinite;
 }
 
@@ -127,15 +127,15 @@
     font-size: 3rem;
     font-weight: 900;
     margin-bottom: 0.5rem;
-    background: linear-gradient(135deg, var(--primary), var(--secondary), var(--accent));
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
+    background: linear-gradient(135deg, #ffffff 30%, #e2c076 70%, #c5a059 100%) !important;
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
 }
 
 .welcome-tagline {
     font-size: 1.5rem;
-    color: var(--accent);
+    color: #c5a059 !important;
     font-weight: 700;
     margin-bottom: 1.5rem;
 }
@@ -143,7 +143,7 @@
 .welcome-divider {
     width: 100px;
     height: 3px;
-    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    background: linear-gradient(90deg, #c5a059, #8c6a28) !important;
     margin: 0 auto 1.5rem;
     border-radius: 3px;
 }
@@ -156,18 +156,18 @@
 
 .welcome-btn {
     padding: 1rem 3rem;
-    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    background: linear-gradient(135deg, #c5a059, #8c6a28) !important;
     border: none;
     border-radius: 50px;
     font-size: 1.2rem;
-    font-weight: 700;
-    color: white;
+    font-weight: 800 !important;
+    color: #0b0f17 !important;
     cursor: pointer;
     display: inline-flex;
     align-items: center;
     gap: 0.75rem;
     transition: all 0.3s ease;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 10px 30px rgba(197, 160, 89, 0.35) !important;
 }
 
 .welcome-btn:hover {

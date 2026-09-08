@@ -1,7 +1,7 @@
 // Service Worker - المعمار الذكي
 // تطوير: عامر درزي العنزي
 
-const CACHE_NAME = 'almimar-v1';
+const CACHE_NAME = 'almimar-v3-architectural';
 const urlsToCache = [
     '/',
     '/index.html',

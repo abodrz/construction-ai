@@ -8,7 +8,7 @@
     <meta name="description" content="منصة ذكاء اصطناعي متكاملة لحساب تكاليف البناء واختيار المواد والتصميم الداخلي">
 
     <!-- PWA Meta Tags -->
-    <meta name="theme-color" content="#00d4ff">
+    <meta name="theme-color" content="#0b0f17">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="المعمار الذكي">
@@ -103,12 +103,116 @@
                         <button class="tool-btn" id="btnXRay3D" title="رؤية الهيكل الإنشائي الداخلي">
                             <i class="fa-solid fa-bone"></i> وضع الأشعة (X-Ray)
                         </button>
+                        <button class="tool-btn" id="btnSunPath3D" title="محاكاة مسار الشمس والظلال المعمارية">
+                            <i class="fa-solid fa-sun-plant-wilt"></i> مسار الشمس
+                        </button>
+                        <button class="tool-btn" id="btnMaterialPalette" title="تخصيص خامات وألوان الفيلا (المرحلة 5)">
+                            <i class="fa-solid fa-palette"></i> تخصيص الخامات
+                        </button>
                         <div class="tool-divider"></div>
                         <button class="tool-icon-btn active" id="camIsoBtn" title="منظور إيزومترك (زاوية)"><i class="fa-solid fa-shapes"></i></button>
                         <button class="tool-icon-btn" id="camDroneBtn" title="منظور علوي (درون)"><i class="fa-solid fa-helicopter"></i></button>
                         <button class="tool-icon-btn" id="camFrontBtn" title="الواجهة الأمامية"><i class="fa-solid fa-building"></i></button>
                         <button class="tool-icon-btn" id="camPoolBtn" title="المسبح واللاندسكيب"><i class="fa-solid fa-water-ladder"></i></button>
                         <button class="tool-icon-btn" id="camResetBtn" title="إعادة ضبط الكاميرا"><i class="fa-solid fa-arrows-rotate"></i></button>
+                    </div>
+
+                    <!-- لوحة تخصيص الخامات والألوان التفاعلية 3D -->
+                    
+                    <!-- لوحة محاكاة مسار الشمس والظلال المعمارية 3D -->
+                    <div class="sun-path-panel hidden" id="sunPathPanel">
+                        <div class="sun-path-header">
+                            <span class="sun-title"><i class="fa-solid fa-sun-plant-wilt"></i> مسار الشمس والظلال المعمارية</span>
+                            <button class="close-sun-btn" id="closeSunPathBtn" title="إغلاق"><i class="fa-solid fa-times"></i></button>
+                        </div>
+                        <div class="sun-time-display-box">
+                            <span class="sun-time-text" id="sunTimeDisplay"><i class="fa-solid fa-sun"></i> 12:00 م (شمس الظهيرة العمودية)</span>
+                            <span class="sun-shadow-desc" id="sunShadowDesc">ظلال رأسية حادة - أفضل زاوية كفاءة للألواح الشمسية وكاسرات الشمس</span>
+                        </div>
+                        <div class="sun-slider-wrap">
+                            <span class="sun-endpoint"><i class="fa-solid fa-cloud-sun"></i> 06:00 ص</span>
+                            <input type="range" id="sunTimeSlider" min="6" max="18" step="0.25" value="12" class="sun-range-slider" />
+                            <span class="sun-endpoint"><i class="fa-solid fa-mountain-sun"></i> 06:00 م</span>
+                        </div>
+                        <div class="sun-quick-times">
+                            <button class="sun-quick-btn" data-hour="7"><i class="fa-solid fa-cloud-sun"></i> 07:00 ص</button>
+                            <button class="sun-quick-btn active" data-hour="12"><i class="fa-solid fa-sun"></i> 12:00 م</button>
+                            <button class="sun-quick-btn" data-hour="15.5"><i class="fa-solid fa-sun"></i> 03:30 م</button>
+                            <button class="sun-quick-btn" data-hour="17.5"><i class="fa-solid fa-mountain-sun"></i> 05:30 م</button>
+                        </div>
+                        <div class="sun-orientation-box">
+                            <i class="fa-solid fa-compass"></i> توجيه الواجهة: <strong>جنوبي غربي (تظليل مثالي للبرجولا والمسبح)</strong>
+                        </div>
+                    </div>
+
+<div class="material-customizer-panel hidden" id="materialCustomizerPanel">
+                        <div class="customizer-header">
+                            <h5><i class="fa-solid fa-palette"></i> تخصيص خامات الفيلا (المرحلة 5)</h5>
+                            <button class="close-customizer-btn" id="closeCustomizerBtn" title="إغلاق"><i class="fa-solid fa-times"></i></button>
+                        </div>
+                        <div class="customizer-body">
+                            <div class="customizer-group">
+                                <label><i class="fa-solid fa-gem"></i> رخام وحجر الواجهة:</label>
+                                <div class="swatch-row">
+                                    <button class="swatch-btn active" data-mat="travertine" title="ترافنتينو بيج طبيعي">
+                                        <span class="color-preview" style="background: #f5f0e6; border: 1px solid #d1be9d;"></span>
+                                        <span>ترافنتينو بيج</span>
+                                    </button>
+                                    <button class="swatch-btn" data-mat="calacatta" title="رخام كلكتا أبيض فخم">
+                                        <span class="color-preview" style="background: #ffffff; border: 1px solid #cbd5e1;"></span>
+                                        <span>كلكتا أبيض</span>
+                                    </button>
+                                    <button class="swatch-btn" data-mat="anthracite" title="حجر بازلت أنثراسايت رمادي">
+                                        <span class="color-preview" style="background: #2a303c;"></span>
+                                        <span>رمادي داكن</span>
+                                    </button>
+                                    <button class="swatch-btn" data-mat="sandstone" title="حجر الرياض الصحراوي الدافئ">
+                                        <span class="color-preview" style="background: #e2cfa8;"></span>
+                                        <span>حجر الرياض</span>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="customizer-group">
+                                <label><i class="fa-solid fa-layer-group"></i> كاسرات الشمس والبرجولا:</label>
+                                <div class="swatch-row">
+                                    <button class="swatch-btn active" data-wood="teak" title="خشب تيك طبيعي دافئ">
+                                        <span class="color-preview" style="background: #7c4927;"></span>
+                                        <span>تيك طبيعي</span>
+                                    </button>
+                                    <button class="swatch-btn" data-wood="walnut" title="خشب جوز داكن فخم">
+                                        <span class="color-preview" style="background: #3d2314;"></span>
+                                        <span>جوز داكن</span>
+                                    </button>
+                                    <button class="swatch-btn" data-wood="black" title="ألمنيوم أسود مطفي عصري">
+                                        <span class="color-preview" style="background: #18181b;"></span>
+                                        <span>أسود عصري</span>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="customizer-group">
+                                <label><i class="fa-solid fa-water"></i> إضاءة المسبح الليلية:</label>
+                                <div class="swatch-row">
+                                    <button class="swatch-btn active" data-pool="cyan" title="تركوازي كريستالي">
+                                        <span class="color-preview" style="background: #00f2fe; box-shadow: 0 0 8px #00f2fe;"></span>
+                                        <span>تركوازي</span>
+                                    </button>
+                                    <button class="swatch-btn" data-pool="royal" title="أزرق ملكي عميق">
+                                        <span class="color-preview" style="background: #2563eb; box-shadow: 0 0 8px #2563eb;"></span>
+                                        <span>أزرق ملكي</span>
+                                    </button>
+                                    <button class="swatch-btn" data-pool="neon" title="بنفسجي نيون مودرن">
+                                        <span class="color-preview" style="background: #a855f7; box-shadow: 0 0 8px #a855f7;"></span>
+                                        <span>بنفسجي</span>
+                                    </button>
+                                    <button class="swatch-btn" data-pool="gold" title="ذهبي دافئ رومانسي">
+                                        <span class="color-preview" style="background: #eab308; box-shadow: 0 0 8px #eab308;"></span>
+                                        <span>ذهبي</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
                     <!-- بطاقة بيانات الذكاء الاصطناعي الهندسية HUD -->
@@ -170,15 +274,21 @@
             </div>
             <div class="nav-links">
                 <a href="#calculator" class="nav-link"><i class="fa-solid fa-calculator"></i> حاسبة التكلفة</a>
-                <a href="#materials" class="nav-link"><i class="fa-solid fa-cubes"></i> المواد</a>
+                <a href="#materials" class="nav-link"><i class="fa-solid fa-cubes"></i> دليل المواد</a>
                 <a href="#gallery" class="nav-link"><i class="fa-solid fa-images"></i> المعرض</a>
                 <a href="javascript:void(0)" class="nav-link nav-3d-btn" id="nav3dBtn"><i class="fa-solid fa-cube"></i> محاكي 3D</a>
                 <a href="#stages" class="nav-link"><i class="fa-solid fa-list-check"></i> المراحل</a>
                 <a href="#tips" class="nav-link"><i class="fa-solid fa-lightbulb"></i> نصائح</a>
             </div>
-            <div class="developer-tag">
-                <i class="fa-solid fa-code"></i>
-                عامر درزي العنزي
+            <div class="nav-actions">
+                <button class="theme-toggle-btn" id="themeToggleBtn" title="التبديل بين النمط المعماري الداكن ونمط الترافرتين الفاتح">
+                    <i class="fa-solid fa-sun" id="themeToggleIcon"></i>
+                    <span id="themeToggleText">النمط الفاتح</span>
+                </button>
+                <div class="developer-tag">
+                    <i class="fa-solid fa-code"></i>
+                    عامر درزي العنزي
+                </div>
             </div>
         </div>
     </nav>
@@ -322,6 +432,30 @@
                         </div>
                     </div>
 
+                    <!-- بطاقة التوصيات الجيوتقنية ومؤشر المنطقة لعام 2026 -->
+                    <div class="regional-advisory-card" id="regionalAdvisoryCard">
+                        <div class="advisory-header">
+                            <span class="advisory-city-badge" id="advisoryCityBadge"><i class="fa-solid fa-location-dot"></i> مؤشر منطقة الرياض</span>
+                            <span class="advisory-cost-factor" id="advisoryCostFactor">سعر الأساس المعتمد لعام 2026</span>
+                        </div>
+                        <div class="advisory-body">
+                            <div class="advisory-item">
+                                <i class="fa-solid fa-mountain"></i>
+                                <div>
+                                    <strong>طبيعة التربة والحفر:</strong>
+                                    <span id="advisorySoilText">تربة صخرية كلسية صلبة، تتطلب حفر ميكانيكي واختبار بروكتور للرص الهندسي لطبقات الدفان.</span>
+                                </div>
+                            </div>
+                            <div class="advisory-item">
+                                <i class="fa-solid fa-shield-halved"></i>
+                                <div>
+                                    <strong>اشتراطات العزل وكود البناء (SBC):</strong>
+                                    <span id="advisoryCodeText">عزل حراري عالي الكفاءة (بوليسترين أزرق سماكة 5 سم) لمقاومة درجات الحرارة الجافة وخفض استهلاك التكييف.</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <!-- خيارات إضافية -->
                     <div class="extra-options">
                         <h4><i class="fa-solid fa-plus-circle"></i> إضافات اختيارية</h4>
@@ -462,6 +596,38 @@
         </div>
     </section>
 
+
+        <!-- قسم المقارنة التفاعلية قبل وبعد (Before & After Transformation) -->
+    <section class="section before-after-section" id="comparisonSection">
+        <div class="section-header">
+            <span class="section-tag"><i class="fa-solid fa-code-compare"></i> تحول معماري ملهم</span>
+            <h2>شاهد التحول: من مرحلة العظم إلى الفخامة العصرية</h2>
+            <p>اسحب المقبض التفاعلي يميناً ويساراً لترى كيف يتحول الهيكل الإنشائي والخرسانة إلى فيلا سكنية فاخرة مكتملة التفاصيل</p>
+        </div>
+
+        <div class="ba-slider-container glass-card" id="baSliderContainer">
+            <!-- صورة قبل (عظم وإنشاء) -->
+            <div class="ba-image-layer ba-before">
+                <img src="images/villa_before.jpg" alt="مرحلة العظم والأساسات الإنشائية" />
+                <span class="ba-tag tag-before"><i class="fa-solid fa-trowel-bricks"></i> قبل: الهيكل الإنشائي والعظم</span>
+            </div>
+
+            <!-- صورة بعد (فيلا فاخرة مكتملة) مع طبقة القطع -->
+            <div class="ba-image-layer ba-after" id="baAfterLayer">
+                <img src="images/villa_after.jpg" alt="الفيلا بعد التشطيب الفاخر والمسبح" />
+                <span class="ba-tag tag-after"><i class="fa-solid fa-wand-magic-sparkles"></i> بعد: التشطيب الفاخر والمسبح</span>
+            </div>
+
+            <!-- خط ومقبض السحب التفاعلي -->
+            <div class="ba-slider-handle" id="baSliderHandle">
+                <div class="handle-line"></div>
+                <div class="handle-circle">
+                    <i class="fa-solid fa-arrows-left-right"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- قسم المواد -->
     <section class="section materials-section" id="materials">
         <div class="section-header">
@@ -503,17 +669,23 @@
 
         <div class="gallery-controls">
             <div class="style-selector">
-                <label>نمط التصميم:</label>
+                <label><i class="fa-solid fa-palette"></i> نمط التصميم المعماري:</label>
                 <select id="designStyle">
-                    <option value="modern">عصري حديث</option>
-                    <option value="classic">كلاسيكي فاخر</option>
-                    <option value="minimalist">مينيمال</option>
-                    <option value="arabic">عربي تراثي</option>
+                    <option value="modern" selected>عصري حديث (Contemporary Modern)</option>
+                    <option value="classic">كلاسيكي فاخر (Luxury Neoclassic)</option>
+                    <option value="minimalist">مينيمال نقي (Minimalist)</option>
+                    <option value="arabic">عربي تراثي وسلماني (Traditional & Salmani)</option>
                 </select>
             </div>
             <button class="btn-primary pulse-glow btn-simulator-trigger" id="watchJourneyBtn">
                 <i class="fa-solid fa-cube"></i> محاكي البناء 3D التفاعلي
             </button>
+        </div>
+
+        <!-- شريط تفاصيل ومميزات النمط المعماري المختار -->
+        <div class="style-description-banner" id="styleDescriptionBanner">
+            <div class="style-banner-badge" id="styleBadgeTag"><i class="fa-solid fa-wand-magic-sparkles"></i> عصري حديث</div>
+            <div class="style-banner-text" id="styleBadgeDesc">واجهات زجاجية بانورامية، خطوط معمارية جريئة، تكسيات رخام ترافنتينو، وكاسرات شمس خشبية ذكية.</div>
         </div>
 
         <div class="gallery-wrapper">
@@ -760,6 +932,86 @@
     <script src="OrbitControls.js"></script>
     <script src="construction3d.js"></script>
     <script src="script.js"></script>
+    <!-- زر ونافذة المستشار المعماري الصوتي الذكي (Voice AI Assistant) -->
+    <button class="voice-ai-trigger" id="voiceAiTrigger" title="تحدث مع المستشار المعماري الذكي">
+        <div class="voice-pulse-ring"></div>
+        <div class="voice-pulse-ring delay-1"></div>
+        <i class="fa-solid fa-microphone"></i>
+        <span class="voice-btn-label">المستشار الذكي</span>
+    </button>
+
+    <div class="voice-ai-modal hidden" id="voiceAiModal">
+        <div class="voice-ai-backdrop" id="voiceAiBackdrop"></div>
+        <div class="voice-ai-card glass-card">
+            <div class="voice-ai-header">
+                <div class="ai-header-profile">
+                    <div class="ai-avatar-box">
+                        <i class="fa-solid fa-robot"></i>
+                        <span class="online-indicator"></span>
+                    </div>
+                    <div>
+                        <h4>المستشار المعماري الذكي</h4>
+                        <span class="ai-status-text" id="voiceAiStatus">
+                            <i class="fa-solid fa-circle"></i> متصل وجاهز للاستماع
+                        </span>
+                    </div>
+                </div>
+                <div class="voice-header-actions">
+                    <button class="voice-action-btn" id="voiceSpeedBtn" title="تغيير سرعة الصوت">
+                        <i class="fa-solid fa-gauge-high"></i> <span id="voiceSpeedLabel">0.9x</span>
+                    </button>
+                    <button class="voice-action-btn" id="voiceMuteToggleBtn" title="كتم / تشغيل الصوت">
+                        <i class="fa-solid fa-volume-high" id="voiceMuteIcon"></i>
+                    </button>
+                    <button class="close-voice-btn" id="closeVoiceAiBtn" title="إغلاق"><i class="fa-solid fa-times"></i></button>
+                </div>
+            </div>
+
+            <!-- موجات الصوت أثناء التحدث أو الاستماع -->
+            <div class="voice-waves-container" id="voiceWaves">
+                <span class="wave"></span>
+                <span class="wave"></span>
+                <span class="wave"></span>
+                <span class="wave"></span>
+                <span class="wave"></span>
+            </div>
+
+            <!-- سجل المحادثة -->
+            <div class="voice-chat-box" id="voiceChatBox">
+                <div class="chat-bubble ai-bubble">
+                    <div class="bubble-avatar"><i class="fa-solid fa-robot"></i></div>
+                    <div class="bubble-content-wrap">
+                        <div class="bubble-text">
+                            أهلاً وسهلاً بك! أنا مستشارك المعماري الذكي. اضغط على زر المايك وتحدث معي بصوتك، أو اسألني عن تكاليف البناء، رخص منصة بلدي، أو العوازل.
+                        </div>
+                        <button class="bubble-replay-btn" data-spoken="أهلاً وسهلاً بك. أنا مستشارك المعماري الذكي، تفضل بسؤالك وسأجيبك فوراً.">
+                            <i class="fa-solid fa-volume-high"></i> استمع للترحيب
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- اقتراحات سريعة -->
+            <div class="voice-quick-chips">
+                <button class="voice-chip" data-query="كم تكلفة بناء فيلا 400 متر في الرياض؟">تكلفة فيلا 400م²؟</button>
+                <button class="voice-chip" data-query="ما هو أفضل نوع عازل مائي وحراري للأسطح؟">عوازل الأسطح</button>
+                <button class="voice-chip" data-query="ما هي شروط رخصة إتمام البناء في منصة بلدي؟">شروط إتمام البناء</button>
+                <button class="voice-chip" data-query="ما الفرق بين البلوك البركاني والأسمنتي؟">البلوك البركاني</button>
+            </div>
+
+            <!-- أزرار الإدخال والمايكروفون -->
+            <div class="voice-input-controls">
+                <button class="big-mic-btn" id="bigMicBtn" title="اضغط للتحدث بالصوت">
+                    <i class="fa-solid fa-microphone"></i>
+                </button>
+                <div class="text-input-bar">
+                    <input type="text" id="voiceTextQuery" placeholder="أو اكتب استفسارك هنا..." />
+                    <button class="send-query-btn" id="sendVoiceQueryBtn"><i class="fa-solid fa-paper-plane"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </body>
 
 </html>

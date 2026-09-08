@@ -1,7 +1,8 @@
-﻿/**
- * المعمار الذكي - محرك محاكاة البناء ثلاثي الأبعاد (3D Construction Simulator)
+/**
+ * المعمار الذكي - محرك محاكاة البناء ثلاثي الأبعاد الواقعي (Realistic 3D Construction Simulator)
  * مطور بواسطة: عامر درزي العنزي
- * تقنية: Three.js (100% Client-side, Compatible with GitHub Pages)
+ * تقنية: Three.js (PBR Materials, Architectural Lighting & Environment)
+ * متوافق بنسبة 100% مع GitHub Pages وبدون أي خوادم خارجية
  */
 
 class ConstructionSimulator3D {
@@ -18,13 +19,13 @@ class ConstructionSimulator3D {
 
         this.stagesData = {
             1: {
-                title: "المرحلة الأولى: تجهيز الموقع والحفر",
+                title: "المرحلة الأولى: تجهيز الموقع وأعمال الحفر والتمهيد",
                 tag: "الأعمال الترابية والتمهيد",
                 percent: 15,
                 cost: "25,000 - 45,000 ر.س",
                 duration: "2 - 3 أسابيع",
-                materials: "حفر صخري، دمك تربة، صبة نظافة 10سم، سياج أمني",
-                tip: "احرص على إجراء اختبار فحص التربة (Soil Test) لتحديد عمق التأسيس ونوعية القواعد المناسبة بدقة."
+                materials: "حفر صخري، دمك تربة، صبة نظافة 10سم، سياج أمني مؤقت",
+                tip: "احرص على إجراء اختبار فحص التربة (Soil Test) لتحديد منسوب التأسيس الآمن ونوعية القواعد بدقة."
             },
             2: {
                 title: "المرحلة الثانية: القواعد والميدات والأساسات",
@@ -32,8 +33,8 @@ class ConstructionSimulator3D {
                 percent: 35,
                 cost: "85,000 - 130,000 ر.س",
                 duration: "3 - 5 أسابيع",
-                materials: "خرسانة مقاومة للأملاح (SRC)، حديد تسليح عالي الشد (سرك)، عزل مائي بيتوميني",
-                tip: "العزل المائي للقواعد والميدات يحمي حديد التسليح من الصدأ والمياه الجوفية لعشرات السنين."
+                materials: "خرسانة مقاومة للأملاح (SRC)، حديد تسليح عالي الشد، عزل مائي بيتوميني",
+                tip: "العزل المائي للقواعد والميدات يحمي حديد التسليح من التآكل والأملاح الجوفية لعشرات السنين."
             },
             3: {
                 title: "المرحلة الثالثة: الهيكل الإنشائي والأعمدة والأسقف",
@@ -42,11 +43,11 @@ class ConstructionSimulator3D {
                 cost: "160,000 - 240,000 ر.س",
                 duration: "8 - 12 أسبوع",
                 materials: "خرسانة جاهزة K-350، حديد سابك 14-16 ملم، خشب بليود للصبة المعمارية",
-                tip: "التأكد من رش الخرسانة بالماء (المعالجة المائية) مرتين يومياً لمدة 7 أيام متواصلة لضمان أقصى متانة."
+                tip: "التأكد من رش الخرسانة بالماء مرتين يومياً لمدة 7 أيام متواصلة لضمان أقصى إجهاد ومتانة."
             },
             4: {
                 title: "المرحلة الرابعة: أعمال البلوك والجدران والعوازل",
-                tag: "المباني والتقسيمات",
+                tag: "المباني والتقسيمات المعمارية",
                 percent: 80,
                 cost: "70,000 - 110,000 ر.س",
                 duration: "4 - 6 أسابيع",
@@ -55,12 +56,12 @@ class ConstructionSimulator3D {
             },
             5: {
                 title: "المرحلة الخامسة: التشطيبات الفاخرة والواجهات والمسبح",
-                tag: "الواجهات المودرن واللاندسكيب",
+                tag: "الواجهات المودرن واللاندسكيب الراقي",
                 percent: 100,
                 cost: "220,000 - 380,000 ر.س",
                 duration: "10 - 16 أسبوع",
-                materials: "رخام ترافنتينو، بديل خشب خارجي WPC، زجاج دبل جلاس عاكس، إضاءات LED معمارية",
-                tip: "الواجهات الزجاجية البانورامية مع كاسرات الشمس الخشبية تمنح فيلتك طابعاً معمارياً فائق الفخامة والراحة."
+                materials: "رخام ترافنتينو بيج، بديل خشب خارجي WPC تيك، زجاج دبل جلاس عاكس، إضاءات LED مخفية",
+                tip: "الواجهات الزجاجية البانورامية مع كاسرات الشمس الخشبية ورخام الترافنتينو تمنح فيلتك فخامة معمارية استثنائية."
             }
         };
 
@@ -76,8 +77,9 @@ class ConstructionSimulator3D {
         const height = this.container.clientHeight || 520;
 
         this.scene = new THREE.Scene();
-        this.scene.background = new THREE.Color(0x0a0f1d);
-        this.scene.fog = new THREE.FogExp2(0x0a0f1d, 0.015);
+        // خلفية سماوية هادئة واقعية للوضع النهاري
+        this.scene.background = new THREE.Color(0xdce7f0);
+        this.scene.fog = new THREE.FogExp2(0xdce7f0, 0.012);
 
         this.camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000);
         this.camera.position.set(22, 16, 24);
@@ -88,7 +90,7 @@ class ConstructionSimulator3D {
         this.renderer.shadowMap.enabled = true;
         this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
         this.renderer.toneMapping = THREE.ACESFilmicToneMapping;
-        this.renderer.toneMappingExposure = 1.1;
+        this.renderer.toneMappingExposure = 1.05;
 
         const oldCanvas = this.container.querySelector('canvas');
         if (oldCanvas) oldCanvas.remove();
@@ -119,94 +121,175 @@ class ConstructionSimulator3D {
     }
 
     initMaterials() {
-        this.materials.dirt = new THREE.MeshStandardMaterial({ color: 0x5c4033, roughness: 0.95, metalness: 0.05 });
-        this.materials.sand = new THREE.MeshStandardMaterial({ color: 0xd2b48c, roughness: 0.9, metalness: 0.0 });
-        this.materials.concrete = new THREE.MeshStandardMaterial({ color: 0x8a9098, roughness: 0.85, metalness: 0.1 });
-        this.materials.concreteDark = new THREE.MeshStandardMaterial({ color: 0x555a60, roughness: 0.9, metalness: 0.15 });
-        this.materials.rebar = new THREE.MeshStandardMaterial({ color: 0x9b3a1a, roughness: 0.4, metalness: 0.8 });
-        this.materials.brick = new THREE.MeshStandardMaterial({ color: 0x9a3822, roughness: 0.8, metalness: 0.05 });
-        this.materials.travertine = new THREE.MeshStandardMaterial({ color: 0xf5efe6, roughness: 0.35, metalness: 0.05 });
-        this.materials.darkAccent = new THREE.MeshStandardMaterial({ color: 0x1e2229, roughness: 0.3, metalness: 0.4 });
-        this.materials.wood = new THREE.MeshStandardMaterial({ color: 0x8b5a2b, roughness: 0.5, metalness: 0.1 });
+        // خامات PBR واقعية بألوان طبيعية متناسقة هندسياً
+        this.materials.dirt = new THREE.MeshStandardMaterial({ 
+            color: 0x544438, 
+            roughness: 0.95, 
+            metalness: 0.02 
+        });
+        this.materials.sand = new THREE.MeshStandardMaterial({ 
+            color: 0xd1be9d, 
+            roughness: 0.9, 
+            metalness: 0.0 
+        });
+        this.materials.concrete = new THREE.MeshStandardMaterial({ 
+            color: 0x9fa5ad, 
+            roughness: 0.8, 
+            metalness: 0.08 
+        });
+        this.materials.concreteDark = new THREE.MeshStandardMaterial({ 
+            color: 0x3d4147, 
+            roughness: 0.85, 
+            metalness: 0.1 
+        });
+        this.materials.rebar = new THREE.MeshStandardMaterial({ 
+            color: 0x7a3a24, 
+            roughness: 0.45, 
+            metalness: 0.75 
+        });
+        this.materials.brick = new THREE.MeshStandardMaterial({ 
+            color: 0xb54c2d, 
+            roughness: 0.82, 
+            metalness: 0.04 
+        });
+        // رخام ترافنتينو بيج طبيعي فخم للواجهات
+        this.materials.travertine = new THREE.MeshStandardMaterial({ 
+            color: 0xf5f0e6, 
+            roughness: 0.38, 
+            metalness: 0.03 
+        });
+        // بياض واجهات ناصع ومودرن
+        this.materials.whitePlaster = new THREE.MeshStandardMaterial({ 
+            color: 0xf0f0f2, 
+            roughness: 0.65, 
+            metalness: 0.02 
+        });
+        // إطارات رمادية أنثراسايت فخمة (Anthracite / Charcoal)
+        this.materials.darkAccent = new THREE.MeshStandardMaterial({ 
+            color: 0x22262d, 
+            roughness: 0.32, 
+            metalness: 0.28 
+        });
+        // خشب تيك طبيعي دافئ لكاسرات الشمس
+        this.materials.wood = new THREE.MeshStandardMaterial({ 
+            color: 0x7c4927, 
+            roughness: 0.45, 
+            metalness: 0.05 
+        });
+        // زجاج معماري بانورامي فخم عاكس
         this.materials.glass = new THREE.MeshPhysicalMaterial({
-            color: 0x88ccff,
+            color: 0x1d354a,
             transparent: true,
-            opacity: 0.55,
-            roughness: 0.1,
+            opacity: 0.52,
+            roughness: 0.08,
+            metalness: 0.15,
+            transmission: 0.82,
+            ior: 1.52,
+            reflectivity: 0.85
+        });
+        // درابزين زجاجي شفاف مع انعكاس رقيق
+        this.materials.glassRailing = new THREE.MeshPhysicalMaterial({
+            color: 0x244256,
+            transparent: true,
+            opacity: 0.4,
+            roughness: 0.08,
             metalness: 0.1,
-            transmission: 0.85,
+            transmission: 0.9,
             ior: 1.5
         });
-        this.materials.glassRailing = new THREE.MeshPhysicalMaterial({
-            color: 0x00d4ff,
+        // مياه مسبح تركوازية كريستالية
+        this.materials.water = new THREE.MeshPhysicalMaterial({
+            color: 0x06b6d4,
+            roughness: 0.12,
+            metalness: 0.1,
+            transmission: 0.75,
+            opacity: 0.85,
             transparent: true,
-            opacity: 0.45,
-            roughness: 0.1,
-            metalness: 0.1
+            ior: 1.33
         });
-        this.materials.water = new THREE.MeshStandardMaterial({
-            color: 0x00b4d8,
-            roughness: 0.1,
-            metalness: 0.3,
-            transparent: true,
-            opacity: 0.85
+        // عشب طبيعي نضر وحديقة خضراء
+        this.materials.grass = new THREE.MeshStandardMaterial({ 
+            color: 0x2d5c28, 
+            roughness: 0.9, 
+            metalness: 0.02 
         });
-        this.materials.grass = new THREE.MeshStandardMaterial({ color: 0x2d6a4f, roughness: 0.9, metalness: 0.05 });
-        this.materials.paving = new THREE.MeshStandardMaterial({ color: 0x495057, roughness: 0.7, metalness: 0.1 });
-        this.materials.ledWarm = new THREE.MeshBasicMaterial({ color: 0xffd166 });
-        this.materials.ledCyan = new THREE.MeshBasicMaterial({ color: 0x00f5d4 });
-        this.materials.xraySkeleton = new THREE.MeshBasicMaterial({ color: 0xff8c00 });
-        this.materials.xrayWall = new THREE.MeshStandardMaterial({ color: 0x00a8ff, wireframe: true, transparent: true, opacity: 0.35 });
+        // أرضيات وأرصفة إنترلوك وبازلت أنيقة
+        this.materials.paving = new THREE.MeshStandardMaterial({ 
+            color: 0x5a616d, 
+            roughness: 0.75, 
+            metalness: 0.08 
+        });
+        this.materials.pavingLight = new THREE.MeshStandardMaterial({ 
+            color: 0xe8e4dc, 
+            roughness: 0.5, 
+            metalness: 0.05 
+        });
+        // إضاءات LED مخفية بدرجة 3000K دافئة
+        this.materials.ledWarm = new THREE.MeshBasicMaterial({ color: 0xffe29a });
+        this.materials.ledCyan = new THREE.MeshBasicMaterial({ color: 0x38bdf8 });
+        // خامات وضع الأشعة X-Ray
+        this.materials.xraySkeleton = new THREE.MeshBasicMaterial({ color: 0xff7b00 });
+        this.materials.xrayWall = new THREE.MeshStandardMaterial({ 
+            color: 0x0099ff, 
+            wireframe: true, 
+            transparent: true, 
+            opacity: 0.35 
+        });
     }
 
     initLights() {
-        this.lights.ambient = new THREE.AmbientLight(0xffffff, 0.75);
-        this.scene.add(this.lights.ambient);
+        // إضاءة نصف كروية تحاكي انعكاس قبة السماء على الأرض (Sky + Ground bounce)
+        this.lights.hemi = new THREE.HemisphereLight(0xf2f7fc, 0x4a5568, 0.8);
+        this.scene.add(this.lights.hemi);
 
-        this.lights.sun = new THREE.DirectionalLight(0xfff7ed, 1.4);
-        this.lights.sun.position.set(25, 35, 18);
+        // شمس رئيسية دافئة وناعمة
+        this.lights.sun = new THREE.DirectionalLight(0xfffaf0, 1.35);
+        this.lights.sun.position.set(24, 38, 20);
         this.lights.sun.castShadow = true;
         this.lights.sun.shadow.mapSize.width = 2048;
         this.lights.sun.shadow.mapSize.height = 2048;
         this.lights.sun.shadow.camera.near = 0.5;
         this.lights.sun.shadow.camera.far = 120;
-        const d = 25;
+        const d = 26;
         this.lights.sun.shadow.camera.left = -d;
         this.lights.sun.shadow.camera.right = d;
         this.lights.sun.shadow.camera.top = d;
         this.lights.sun.shadow.camera.bottom = -d;
-        this.lights.sun.shadow.bias = -0.0005;
+        this.lights.sun.shadow.bias = -0.0004;
         this.scene.add(this.lights.sun);
 
-        this.lights.fill = new THREE.DirectionalLight(0x7090b0, 0.4);
-        this.lights.fill.position.set(-20, 15, -20);
+        // إضاءة تعبئة ثانوية لمنع الظلال القاتمة المعتمة
+        this.lights.fill = new THREE.DirectionalLight(0xa5b9ce, 0.35);
+        this.lights.fill.position.set(-20, 16, -18);
         this.scene.add(this.lights.fill);
 
-        this.lights.villaSpot1 = new THREE.PointLight(0xffb703, 0, 18);
+        // إضاءات معمارية موجهة للواجهة والمسبح (تنشط ليلاً)
+        this.lights.villaSpot1 = new THREE.PointLight(0xffd166, 0, 18);
         this.lights.villaSpot1.position.set(2, 3.5, 6.5);
         this.scene.add(this.lights.villaSpot1);
 
-        this.lights.villaSpot2 = new THREE.PointLight(0xffb703, 0, 18);
+        this.lights.villaSpot2 = new THREE.PointLight(0xffd166, 0, 18);
         this.lights.villaSpot2.position.set(-4, 3.5, 6.5);
         this.scene.add(this.lights.villaSpot2);
 
-        this.lights.poolLight = new THREE.PointLight(0x00f5d4, 0, 14);
+        this.lights.poolLight = new THREE.PointLight(0x38bdf8, 0, 14);
         this.lights.poolLight.position.set(6, 0.5, 2.5);
         this.scene.add(this.lights.poolLight);
     }
 
     initEnvironment() {
-        const groundGeo = new THREE.PlaneGeometry(70, 70);
-        const groundMat = new THREE.MeshStandardMaterial({ color: 0x121826, roughness: 0.95 });
-        const ground = new THREE.Mesh(groundGeo, groundMat);
-        ground.rotation.x = -Math.PI / 2;
-        ground.position.y = -0.05;
-        ground.receiveShadow = true;
-        this.scene.add(ground);
+        const groundGeo = new THREE.PlaneGeometry(80, 80);
+        this.groundMat = new THREE.MeshStandardMaterial({ color: 0xc8c3b7, roughness: 0.92 });
+        this.ground = new THREE.Mesh(groundGeo, this.groundMat);
+        this.ground.rotation.x = -Math.PI / 2;
+        this.ground.position.y = -0.05;
+        this.ground.receiveShadow = true;
+        this.scene.add(this.ground);
 
-        const grid = new THREE.GridHelper(50, 50, 0x00d4ff, 0x1f293d);
-        grid.position.y = -0.04;
-        this.scene.add(grid);
+        // شبكة مساحية رقيقة وأنيقة
+        this.grid = new THREE.GridHelper(50, 50, 0x8898aa, 0xc2cbd6);
+        this.grid.position.y = -0.04;
+        this.scene.add(this.grid);
     }
 
     buildAllStages() {
@@ -223,11 +306,16 @@ class ConstructionSimulator3D {
 
     buildStage1() {
         const group = this.stageGroups[1];
+        
+        // مجموعة العناصر المؤقتة لمرحلة الحفر (تختفي في المرحلة النهائية)
+        this.stage1TempGroup = new THREE.Group();
+        group.add(this.stage1TempGroup);
+
         const pitGeo = new THREE.BoxGeometry(17, 1.2, 15);
         const pitMesh = new THREE.Mesh(pitGeo, this.materials.dirt);
         pitMesh.position.set(0, -0.6, 0);
         pitMesh.receiveShadow = true;
-        group.add(pitMesh);
+        this.stage1TempGroup.add(pitMesh);
 
         for (let i = 0; i < 6; i++) {
             const moundGeo = new THREE.ConeGeometry(1.2 + Math.random() * 0.8, 1.2, 7);
@@ -235,10 +323,11 @@ class ConstructionSimulator3D {
             const angle = (i / 6) * Math.PI * 2;
             mound.position.set(Math.cos(angle) * 10.5, 0.6, Math.sin(angle) * 9);
             mound.castShadow = true;
-            group.add(mound);
+            this.stage1TempGroup.add(mound);
         }
 
-        const fenceMat = new THREE.MeshStandardMaterial({ color: 0xf59e0b, roughness: 0.5, metalness: 0.3 });
+        // سياج أمني مع لوحات تحذيرية
+        const fenceMat = new THREE.MeshStandardMaterial({ color: 0xd97706, roughness: 0.5, metalness: 0.3 });
         const fenceOffsets = [
             { x: 0, z: -8.8, w: 20, d: 0.1 },
             { x: 0, z: 8.8, w: 20, d: 0.1 },
@@ -249,12 +338,13 @@ class ConstructionSimulator3D {
             const panel = new THREE.Mesh(new THREE.BoxGeometry(f.w, 1.6, f.d), fenceMat);
             panel.position.set(f.x, 0.8, f.z);
             panel.castShadow = true;
-            group.add(panel);
+            this.stage1TempGroup.add(panel);
         });
 
+        // جهاز المحطة الشاملة لمسح وتخطيط الموقع (Total Station)
         const tripodGroup = new THREE.Group();
         const legGeo = new THREE.CylinderGeometry(0.04, 0.04, 1.4);
-        const legMat = new THREE.MeshStandardMaterial({ color: 0xffaa00 });
+        const legMat = new THREE.MeshStandardMaterial({ color: 0xd97706 });
         for (let a = 0; a < 3; a++) {
             const leg = new THREE.Mesh(legGeo, legMat);
             leg.position.set(Math.cos(a * 2.09) * 0.35, 0.7, Math.sin(a * 2.09) * 0.35);
@@ -262,11 +352,11 @@ class ConstructionSimulator3D {
             leg.rotation.x = Math.sin(a * 2.09) * 0.2;
             tripodGroup.add(leg);
         }
-        const totalStation = new THREE.Mesh(new THREE.BoxGeometry(0.25, 0.35, 0.25), new THREE.MeshStandardMaterial({ color: 0x00d4ff }));
+        const totalStation = new THREE.Mesh(new THREE.BoxGeometry(0.25, 0.35, 0.25), new THREE.MeshStandardMaterial({ color: 0x0284c7 }));
         totalStation.position.y = 1.45;
         tripodGroup.add(totalStation);
         tripodGroup.position.set(-8, 0, 6);
-        group.add(tripodGroup);
+        this.stage1TempGroup.add(tripodGroup);
     }
 
     buildStage2() {
@@ -410,27 +500,32 @@ class ConstructionSimulator3D {
     buildStage5() {
         const group = this.stageGroups[5];
 
+        // 1. كتلة الرخام الترافنتينو للواجهة الأرضية
         const facadeStoneGround = new THREE.Mesh(new THREE.BoxGeometry(5.2, 3.3, 0.35), this.materials.travertine);
         facadeStoneGround.position.set(-3.2, 2.7, 4.6);
         facadeStoneGround.castShadow = true;
         group.add(facadeStoneGround);
 
+        // 2. كتلة الواجهة العلوية الفاخرة (Travertine Cladding)
         const upperBox = new THREE.Mesh(new THREE.BoxGeometry(6.2, 3.2, 4.8), this.materials.travertine);
         upperBox.position.set(2.8, 6.2, 2.8);
         upperBox.castShadow = true;
         group.add(upperBox);
 
+        // 3. كاسرات شمس خشبية مودرن (Vertical Teak Louvers)
         for (let l = 0; l < 16; l++) {
-            const louver = new THREE.Mesh(new THREE.BoxGeometry(0.08, 3.0, 0.12), this.materials.wood);
+            const louver = new THREE.Mesh(new THREE.BoxGeometry(0.08, 3.0, 0.14), this.materials.wood);
             louver.position.set(0.2 + l * 0.34, 6.2, 5.25);
             louver.castShadow = true;
             group.add(louver);
         }
 
+        // 4. الواجهة الزجاجية البانورامية بالدور الأرضي
         const glassWallGround = new THREE.Mesh(new THREE.BoxGeometry(4.8, 3.1, 0.08), this.materials.glass);
         glassWallGround.position.set(2.8, 2.7, 4.5);
         group.add(glassWallGround);
 
+        // إطارات ألمنيوم أنثراسايت داكنة
         const frameMat = this.materials.darkAccent;
         const frameTop = new THREE.Mesh(new THREE.BoxGeometry(4.9, 0.12, 0.16), frameMat);
         frameTop.position.set(2.8, 4.2, 4.5);
@@ -440,10 +535,16 @@ class ConstructionSimulator3D {
         frameBottom.position.set(2.8, 1.2, 4.5);
         group.add(frameBottom);
 
-        const glassRailing = new THREE.Mesh(new THREE.BoxGeometry(5.4, 1.0, 0.05), this.materials.glassRailing);
+        // 5. درابزين بلكونة الماستر الزجاجي الفاخر
+        const glassRailing = new THREE.Mesh(new THREE.BoxGeometry(5.4, 1.0, 0.06), this.materials.glassRailing);
         glassRailing.position.set(-3.1, 5.1, 4.7);
         group.add(glassRailing);
 
+        const railingCap = new THREE.Mesh(new THREE.BoxGeometry(5.45, 0.06, 0.08), frameMat);
+        railingCap.position.set(-3.1, 5.6, 4.7);
+        group.add(railingCap);
+
+        // 6. مظلة برجولا السطح المودرن (Rooftop Pergola)
         const pergolaMat = this.materials.darkAccent;
         for (let p = 0; p < 8; p++) {
             const slat = new THREE.Mesh(new THREE.BoxGeometry(0.1, 0.18, 5.0), pergolaMat);
@@ -458,51 +559,107 @@ class ConstructionSimulator3D {
         beamP2.position.set(-2.0, 9.1, -0.8);
         group.add(beamP2);
 
-        const poolBorder = new THREE.Mesh(new THREE.BoxGeometry(6.2, 0.2, 4.2), this.materials.travertine);
-        poolBorder.position.set(6.2, 0.1, 2.5);
+        // 7. مسبح إنفينيتي مودرن راقي (Infinity Pool)
+        // إطار حوض المسبح من الترافنتينو
+        const poolBorder = new THREE.Mesh(new THREE.BoxGeometry(6.6, 0.22, 4.6), this.materials.travertine);
+        poolBorder.position.set(6.2, 0.11, 2.5);
+        poolBorder.receiveShadow = true;
         group.add(poolBorder);
 
+        // أرضية حوض المسبح الداخلية الزرقاء
+        const poolBasin = new THREE.Mesh(new THREE.BoxGeometry(5.8, 0.2, 3.8), new THREE.MeshStandardMaterial({ color: 0x0284c7, roughness: 0.2 }));
+        poolBasin.position.set(6.2, 0.05, 2.5);
+        group.add(poolBasin);
+
+        // مياه المسبح الكريستالية اللامعة
         const poolWater = new THREE.Mesh(new THREE.BoxGeometry(5.8, 0.08, 3.8), this.materials.water);
-        poolWater.position.set(6.2, 0.16, 2.5);
+        poolWater.position.set(6.2, 0.18, 2.5);
         group.add(poolWater);
 
-        const grassLawn = new THREE.Mesh(new THREE.BoxGeometry(18, 0.1, 8), this.materials.grass);
-        grassLawn.position.set(0, 0.08, 9.5);
+        // 8. مسطحات خضراء ولاندسكيب (Lush Green Lawn)
+        const grassLawn = new THREE.Mesh(new THREE.BoxGeometry(19, 0.1, 8.5), this.materials.grass);
+        grassLawn.position.set(0, 0.06, 9.5);
         grassLawn.receiveShadow = true;
         group.add(grassLawn);
 
-        for (let s = 0; s < 5; s++) {
-            const stone = new THREE.Mesh(new THREE.BoxGeometry(1.4, 0.14, 0.9), this.materials.travertine);
-            stone.position.set(-2.5, 0.12, 6.8 + s * 1.3);
+        // درجات رخامية كبيرة على العشب (Stepping Stones)
+        for (let s = 0; s < 6; s++) {
+            const stone = new THREE.Mesh(new THREE.BoxGeometry(1.5, 0.12, 0.9), this.materials.travertine);
+            stone.position.set(-2.5, 0.13, 6.4 + s * 1.35);
             stone.castShadow = true;
+            stone.receiveShadow = true;
             group.add(stone);
         }
 
+        // أحواض أشجار وأشجار نخيل زينة معمارية
         const treePositions = [
             { x: -7.5, z: 8.5 },
             { x: -7.5, z: 12.0 },
             { x: 7.5, z: 12.0 }
         ];
         treePositions.forEach(tp => {
-            const pot = new THREE.Mesh(new THREE.CylinderGeometry(0.6, 0.45, 0.8, 12), this.materials.darkAccent);
-            pot.position.set(tp.x, 0.45, tp.z);
+            const pot = new THREE.Mesh(new THREE.CylinderGeometry(0.55, 0.4, 0.75, 12), this.materials.darkAccent);
+            pot.position.set(tp.x, 0.42, tp.z);
             pot.castShadow = true;
             group.add(pot);
 
-            const trunk = new THREE.Mesh(new THREE.CylinderGeometry(0.12, 0.18, 3.2, 8), this.materials.wood);
+            const trunk = new THREE.Mesh(new THREE.CylinderGeometry(0.12, 0.16, 3.2, 8), this.materials.wood);
             trunk.position.set(tp.x, 2.0, tp.z);
             trunk.castShadow = true;
             group.add(trunk);
 
             for (let f = 0; f < 6; f++) {
-                const frond = new THREE.Mesh(new THREE.ConeGeometry(0.7, 1.8, 4), this.materials.grass);
-                frond.position.set(tp.x + Math.cos(f * 1.05) * 0.7, 3.4, tp.z + Math.sin(f * 1.05) * 0.7);
-                frond.rotation.z = Math.cos(f * 1.05) * 0.6;
-                frond.rotation.x = Math.sin(f * 1.05) * 0.6;
+                const frond = new THREE.Mesh(new THREE.ConeGeometry(0.65, 1.8, 4), this.materials.grass);
+                frond.position.set(tp.x + Math.cos(f * 1.05) * 0.65, 3.4, tp.z + Math.sin(f * 1.05) * 0.65);
+                frond.rotation.z = Math.cos(f * 1.05) * 0.55;
+                frond.rotation.x = Math.sin(f * 1.05) * 0.55;
                 group.add(frond);
             }
         });
 
+        // 9. سور الفيلا الخارجي المودرن الفخم (بديل سياج الحفر البرتقالي)
+        this.boundaryWallGroup = new THREE.Group();
+        group.add(this.boundaryWallGroup);
+
+        // قاعدة سور الفيلا وأعمدة ترافنتينو
+        const wallMat = this.materials.travertine;
+        const louverFenceMat = this.materials.darkAccent;
+
+        // سور يسار
+        const wallLeft = new THREE.Mesh(new THREE.BoxGeometry(0.3, 2.2, 21), wallMat);
+        wallLeft.position.set(-10.2, 1.1, 2.5);
+        wallLeft.castShadow = true;
+        this.boundaryWallGroup.add(wallLeft);
+
+        // سور يمين
+        const wallRight = new THREE.Mesh(new THREE.BoxGeometry(0.3, 2.2, 21), wallMat);
+        wallRight.position.set(10.2, 1.1, 2.5);
+        wallRight.castShadow = true;
+        this.boundaryWallGroup.add(wallRight);
+
+        // سور خلفي
+        const wallBack = new THREE.Mesh(new THREE.BoxGeometry(20.7, 2.2, 0.3), wallMat);
+        wallBack.position.set(0, 1.1, -8.0);
+        wallBack.castShadow = true;
+        this.boundaryWallGroup.add(wallBack);
+
+        // سور أمامي مع بوابة فيلا مودرن
+        const wallFrontL = new THREE.Mesh(new THREE.BoxGeometry(7.0, 2.0, 0.3), wallMat);
+        wallFrontL.position.set(-6.6, 1.0, 13.6);
+        wallFrontL.castShadow = true;
+        this.boundaryWallGroup.add(wallFrontL);
+
+        const wallFrontR = new THREE.Mesh(new THREE.BoxGeometry(7.0, 2.0, 0.3), wallMat);
+        wallFrontR.position.set(6.6, 1.0, 13.6);
+        wallFrontR.castShadow = true;
+        this.boundaryWallGroup.add(wallFrontR);
+
+        // بوابة المدخل المودرن (Anthracite modern gate)
+        const gate = new THREE.Mesh(new THREE.BoxGeometry(4.0, 2.1, 0.1), louverFenceMat);
+        gate.position.set(0, 1.05, 13.6);
+        this.boundaryWallGroup.add(gate);
+
+        // 10. خطوط إضاءة LED مخفية معمارية
         const ledStrip1 = new THREE.Mesh(new THREE.BoxGeometry(5.2, 0.06, 0.06), this.materials.ledWarm);
         ledStrip1.position.set(2.8, 4.55, 5.22);
         group.add(ledStrip1);
@@ -524,6 +681,25 @@ class ConstructionSimulator3D {
                 }
             } else {
                 group.visible = false;
+            }
+        }
+
+        // إخفاء عناصر الحفر المؤقتة والسياج البرتقالي في المرحلة النهائية 5
+        if (this.stage1TempGroup) {
+            this.stage1TempGroup.visible = (this.currentStage < 5);
+        }
+
+        // في المرحلة الخامسة: إظهار الفناء واللاندسكيب وإخفاء شبكة الحفر المساحية لجمال العرض
+        if (this.grid) {
+            this.grid.visible = (this.currentStage < 5);
+        }
+
+        // تكييف لون الأرضية المحيطة
+        if (this.groundMat) {
+            if (this.currentStage === 5) {
+                this.groundMat.color.set(this.isNight ? 0x090e1a : 0xbed0c2); // محيط أخضر طبيعي
+            } else {
+                this.groundMat.color.set(this.isNight ? 0x080c16 : 0xc8c3b7); // تربة موقع بناء
             }
         }
 
@@ -599,33 +775,89 @@ class ConstructionSimulator3D {
         const btn = document.getElementById('btnDayNight3D');
 
         if (this.isNight) {
-            this.scene.background.set(0x050811);
-            this.scene.fog.color.set(0x050811);
-            this.lights.ambient.intensity = 0.25;
-            this.lights.sun.intensity = 0.15;
+            // سماء ليلية فخمة
+            this.scene.background.set(0x090f1d);
+            this.scene.fog.color.set(0x090f1d);
+            if (this.lights.hemi) this.lights.hemi.intensity = 0.22;
+            this.lights.sun.intensity = 0.2;
             this.lights.sun.color.set(0x4361ee);
 
-            this.lights.villaSpot1.intensity = 2.5;
-            this.lights.villaSpot2.intensity = 2.5;
-            this.lights.poolLight.intensity = 3.0;
+            // إنارة معمارية دافئة للواجهات والمسبح
+            this.lights.villaSpot1.intensity = 2.6;
+            this.lights.villaSpot2.intensity = 2.6;
+            this.lights.poolLight.intensity = 3.2;
+
+            if (this.groundMat) {
+                this.groundMat.color.set(this.currentStage === 5 ? 0x090e1a : 0x080c16);
+            }
 
             if (btn) btn.innerHTML = '<i class="fa-solid fa-sun"></i> الوضع النهاري';
         } else {
-            this.scene.background.set(0x0a0f1d);
-            this.scene.fog.color.set(0x0a0f1d);
-            this.lights.ambient.intensity = 0.75;
-            this.lights.sun.intensity = 1.4;
-            this.lights.sun.color.set(0xfff7ed);
+            // سماء نهارية معمارية صافية
+            this.scene.background.set(0xdce7f0);
+            this.scene.fog.color.set(0xdce7f0);
+            if (this.lights.hemi) this.lights.hemi.intensity = 0.8;
+            this.lights.sun.intensity = 1.35;
+            this.lights.sun.color.set(0xfffaf0);
 
             this.lights.villaSpot1.intensity = 0;
             this.lights.villaSpot2.intensity = 0;
             this.lights.poolLight.intensity = 0;
 
+            if (this.groundMat) {
+                this.groundMat.color.set(this.currentStage === 5 ? 0xbed0c2 : 0xc8c3b7);
+            }
+
             if (btn) btn.innerHTML = '<i class="fa-solid fa-moon"></i> الوضع الليلي';
         }
     }
 
-    toggleXRay() {
+        setSunTime(hour) {
+        this.currentSunHour = parseFloat(hour);
+        const t = Math.max(6, Math.min(18, this.currentSunHour));
+
+        // إذا كان بالوضع الليلي، أعده للنهاري عند استخدام شريط الشمس
+        if (this.isNight) {
+            this.toggleDayNight();
+        }
+
+        // حساب زاوية مسار الشمس من الشرق (6 ص) إلى الغرب (6 م)
+        const norm = (t - 6) / 12; // 0.0 إلى 1.0
+        const angle = norm * Math.PI; // 0 إلى PI راديان
+
+        // حساب إحداثيات الشمس القوسية في قبة السماء
+        const sunX = Math.cos(angle) * 45;
+        const sunY = Math.sin(angle) * 36 + 6;
+        const sunZ = Math.sin(angle) * 16 + 18;
+
+        if (this.lights.sun) {
+            this.lights.sun.position.set(sunX, sunY, sunZ);
+
+            if (t <= 8.5) {
+                // شروق الشمس والصباح الباكر: ذهبي دافئ وظلال ممتدة غرباً
+                const factor = (t - 6) / 2.5;
+                this.lights.sun.color.set(0xffaf7a);
+                this.lights.sun.intensity = 0.95 + factor * 0.4;
+                this.scene.background.set(0xebdcd0);
+                if (this.scene.fog) this.scene.fog.color.set(0xebdcd0);
+            } else if (t >= 15.5) {
+                // العصر وشفق الغروب: برتقالي عنبري دافئ وظلال ممتدة شرقاً
+                const factor = (t - 15.5) / 2.5;
+                this.lights.sun.color.set(0xff9944);
+                this.lights.sun.intensity = 1.35 - factor * 0.45;
+                this.scene.background.set(0xebdcd0);
+                if (this.scene.fog) this.scene.fog.color.set(0xebdcd0);
+            } else {
+                // شمس الظهيرة الصافية: أبيض عاجي وإضاءة عمودية ساطعة
+                this.lights.sun.color.set(0xfffaf0);
+                this.lights.sun.intensity = 1.45;
+                this.scene.background.set(0xdce7f0);
+                if (this.scene.fog) this.scene.fog.color.set(0xdce7f0);
+            }
+        }
+    }
+
+toggleXRay() {
         this.isXRay = !this.isXRay;
         const btn = document.getElementById('btnXRay3D');
 
@@ -720,6 +952,55 @@ class ConstructionSimulator3D {
 
         if (this.controls) this.controls.update();
         this.renderer.render(this.scene, this.camera);
+    }
+
+
+    // ============ تخصيص المواد لحظياً في المشهد ثلاثي الأبعاد ============
+    setFacadeCladding(type) {
+        const colors = {
+            travertine: { color: 0xf5f0e6, roughness: 0.38, metalness: 0.03 },
+            calacatta: { color: 0xffffff, roughness: 0.22, metalness: 0.02 },
+            anthracite: { color: 0x2a303c, roughness: 0.45, metalness: 0.2 },
+            sandstone: { color: 0xe2cfa8, roughness: 0.65, metalness: 0.01 }
+        };
+        const c = colors[type] || colors.travertine;
+        if (this.materials.travertine) {
+            this.materials.travertine.color.set(c.color);
+            this.materials.travertine.roughness = c.roughness;
+            this.materials.travertine.metalness = c.metalness;
+            this.materials.travertine.needsUpdate = true;
+        }
+    }
+
+    setWoodFinish(type) {
+        const woods = {
+            teak: { color: 0x7c4927, roughness: 0.45 },
+            walnut: { color: 0x3d2314, roughness: 0.4 },
+            black: { color: 0x18181b, roughness: 0.3 }
+        };
+        const w = woods[type] || woods.teak;
+        if (this.materials.wood) {
+            this.materials.wood.color.set(w.color);
+            this.materials.wood.roughness = w.roughness;
+            this.materials.wood.needsUpdate = true;
+        }
+    }
+
+    setPoolGlow(type) {
+        const colors = {
+            cyan: { water: 0x06b6d4, light: 0x38bdf8 },
+            royal: { water: 0x1d4ed8, light: 0x3b82f6 },
+            neon: { water: 0x9333ea, light: 0xc084fc },
+            gold: { water: 0xd97706, light: 0xfde047 }
+        };
+        const p = colors[type] || colors.cyan;
+        if (this.materials.water) {
+            this.materials.water.color.set(p.water);
+            this.materials.water.needsUpdate = true;
+        }
+        if (this.lights.poolLight) {
+            this.lights.poolLight.color.set(p.light);
+        }
     }
 
     destroy() {
